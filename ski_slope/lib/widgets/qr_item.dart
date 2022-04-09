@@ -1,43 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:qr_flutter/qr_flutter.dart';
+import 'package:ski_slope/resources/colors.dart';
 import 'package:ski_slope/resources/dimensions.dart';
 import 'package:ski_slope/resources/ski_radius.dart';
 import 'package:ski_slope/resources/themes.dart';
 
-class ListItem extends StatelessWidget {
-  const ListItem({Key? key, required this.name, required this.description, required this.onTap}) : super(key: key);
-  final String name;
-  final String description;
-  final VoidCallback? onTap;
+class QrItem extends StatelessWidget {
+  const QrItem({Key? key, required this.qrLink}) : super(key: key);
+  final String qrLink;
 
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: Colors.white,
+      color: SkiColors.additionalColor,
       shape: SkiRadius.roundedRectangleBorder,
-      child: InkWell(
-        onTap: onTap,
-        customBorder: SkiRadius.roundedRectangleBorder,
+      child: Padding(
+        padding: const EdgeInsets.all(Dimensions.paddingMedium),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Expanded(
-              flex: 32,
-              child: ClipRRect(
-                borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(Dimensions.skiSlopeElementRadius),
-                  bottomLeft: Radius.circular(Dimensions.skiSlopeElementRadius),
-                ),
-                child: AspectRatio(
-                  aspectRatio: 1.0,
-                  child: Image.network(
-                    "https://images.unsplash.com/photo-1453728013993-6d66e9c9123a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dmlld3xlbnwwfHwwfHw%3D&w=1000&q=80",
-                    fit: BoxFit.cover,
-                  ),
-                ),
+              flex: 50,
+              child: QrImage(
+                data: qrLink,
+                version: QrVersions.auto,
               ),
             ),
             Expanded(
-              flex: 68,
+              flex: 50,
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: Dimensions.paddingBig),
                 child: Column(
@@ -48,14 +38,14 @@ class ListItem extends StatelessWidget {
                         bottom: Dimensions.paddingBigPlus,
                       ),
                       child: Text(
-                        name,
+                        "name",
                         style: SkiTextStyle.headline1,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),
                     Text(
-                      description,
+                      "description",
                       style: SkiTextStyle.bodyText1,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ski_slope/pages/lift_screen.dart';
-import 'package:ski_slope/pages/vouchers_screen.dart';
+import 'package:ski_slope/pages/qr_screen.dart';
 import 'package:ski_slope/resources/colors.dart';
 import 'package:ski_slope/utilities/extensions.dart';
 import 'package:ski_slope/widgets/ticket_bottom_nav_bar.dart';
@@ -22,7 +22,7 @@ class _MainScreenState extends State<MainScreen> {
           backgroundColor: SkiColors.mainColor,
           title: Text(context.text.appName),
         ),
-        body: currentIndex == 0 ? LiftScreen() : VouchersScreen(),
+        body: currentIndex == 0 ? LiftScreen() : QrScreen(),
         bottomNavigationBar: TicketBottomNavBar(
           currentIndex: currentIndex,
           onTap: (index) => setState(() => currentIndex = index),

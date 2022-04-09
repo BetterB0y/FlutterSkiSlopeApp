@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:ski_slope/pages/qr_screen.dart';
 import 'package:ski_slope/resources/colors.dart';
-import 'package:ski_slope/utilities/extensions.dart';
 
 class TicketScreen extends StatelessWidget {
-  const TicketScreen({Key? key}) : super(key: key);
+  const TicketScreen({Key? key, required this.title}) : super(key: key);
+  final String title;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(context.text.tickets),
+        title: Text(title),
         backgroundColor: SkiColors.mainColor,
       ),
-      body: Text("Ticket"),
+      body: QrScreen(),
     );
   }
 }
