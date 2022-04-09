@@ -1,5 +1,9 @@
 {
   "@@locale": "en",
-  "helloWorld": "Hello World!",
-  "@helloWorld": {}
+  "appName": "Ski Slope",
+  "@appName": {},
+  "tickets": "Tickets",
+  "@tickets": {},
+  "vouchers": "Vouchers",
+  "@vouchers": {}
 }

@@ -1,4 +1,6 @@
 {
-    "@@locale": "pl",
-    "helloWorld": "Cześć świecie!"
+  "@@locale": "pl",
+  "appName": "Stacja Narciarska",
+  "tickets": "Bilety",
+  "vouchers": "Karnety"
 }
