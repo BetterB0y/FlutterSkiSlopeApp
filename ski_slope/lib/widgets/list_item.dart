@@ -3,8 +3,8 @@ import 'package:ski_slope/resources/colors.dart';
 import 'package:ski_slope/resources/dimensions.dart';
 import 'package:ski_slope/resources/themes.dart';
 
-class SlopeItem extends StatelessWidget {
-  const SlopeItem({Key? key, required this.name, required this.description, required this.onTap}) : super(key: key);
+class ListItem extends StatelessWidget {
+  const ListItem({Key? key, required this.name, required this.description, required this.onTap}) : super(key: key);
   final String name;
   final String description;
   final VoidCallback? onTap;

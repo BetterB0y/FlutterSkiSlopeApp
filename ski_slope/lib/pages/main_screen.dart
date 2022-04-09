@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:ski_slope/pages/lift_screen.dart';
+import 'package:ski_slope/pages/vouchers_screen.dart';
 import 'package:ski_slope/resources/colors.dart';
 import 'package:ski_slope/utilities/extensions.dart';
 import 'package:ski_slope/widgets/ticket_bottom_nav_bar.dart';
 
-class TicketScreen extends StatefulWidget {
-  const TicketScreen({Key? key}) : super(key: key);
+class MainScreen extends StatefulWidget {
+  const MainScreen({Key? key}) : super(key: key);
 
   @override
-  State<TicketScreen> createState() => _TicketScreenState();
+  State<MainScreen> createState() => _MainScreenState();
 }
 
-class _TicketScreenState extends State<TicketScreen> {
+class _MainScreenState extends State<MainScreen> {
   int currentIndex = 0;
 
   @override
@@ -18,9 +20,9 @@ class _TicketScreenState extends State<TicketScreen> {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: SkiColors.mainColor,
-          title: currentIndex == 0 ? Text(context.text.tickets) : Text(context.text.vouchers),
+          title: Text(context.text.appName),
         ),
-        body: Text("Placeholder"),
+        body: currentIndex == 0 ? LiftScreen() : VouchersScreen(),
         bottomNavigationBar: TicketBottomNavBar(
           currentIndex: currentIndex,
           onTap: (index) => setState(() => currentIndex = index),
