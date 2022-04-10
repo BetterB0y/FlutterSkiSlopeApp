@@ -22,7 +22,7 @@ class _MainScreenState extends State<MainScreen> {
           backgroundColor: SkiColors.mainColor,
           title: Text(context.text.appName),
         ),
-        body: currentIndex == 0 ? LiftScreen() : QrScreen(),
+        body: currentIndex == 0 ? const LiftScreen() : const QrScreen(),
         bottomNavigationBar: TicketBottomNavBar(
           currentIndex: currentIndex,
           onTap: (index) => setState(() => currentIndex = index),

@@ -21,3 +21,5 @@ extension HexColor on Color {
       '${green.toRadixString(16).padLeft(2, '0')}'
       '${blue.toRadixString(16).padLeft(2, '0')}';
 }
+
+void printError(Object? object) => print('\x1B[31m$object\x1B[0m');

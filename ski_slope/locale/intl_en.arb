@@ -5,5 +5,9 @@
   "tickets": "Tickets",
   "@tickets": {},
   "vouchers": "Vouchers",
-  "@vouchers": {}
+  "@vouchers": {},
+  "previous": "Previous",
+  "@previous": {},
+  "next": "Next",
+  "@next": {}
 }

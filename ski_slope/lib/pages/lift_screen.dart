@@ -17,7 +17,7 @@ class LiftScreen extends StatelessWidget {
             "Ośrodek narciarski położony w Wiśle Jaworniku na tyłach czterogwiazdkowego hotelu „Stok”, w Beskidzie Śląskim",
         onTap: () => navigateToPage(
           context,
-          builder: (context) => TicketScreen(title: "Wyciąg 1"),
+          builder: (context) => const TicketScreen(title: "Wyciąg 1"),
         ),
       ),
       ListItem(
@@ -26,7 +26,7 @@ class LiftScreen extends StatelessWidget {
             "Ośrodek narciarski położony w Wiśle Jaworniku na tyłach czterogwiazdkowego hotelu „Stok”, w Beskidzie Śląskim",
         onTap: () => navigateToPage(
           context,
-          builder: (context) => TicketScreen(title: "Wyciąg 2"),
+          builder: (context) => const TicketScreen(title: "Wyciąg 2"),
         ),
       ),
       ListItem(

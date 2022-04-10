@@ -13,7 +13,7 @@ class TicketScreen extends StatelessWidget {
         title: Text(title),
         backgroundColor: SkiColors.mainColor,
       ),
-      body: QrScreen(),
+      body: const QrScreen(),
     );
   }
 }

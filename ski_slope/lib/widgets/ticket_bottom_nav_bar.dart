@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ski_slope/resources/colors.dart';
 import 'package:ski_slope/utilities/extensions.dart';
 
 class TicketBottomNavBar extends StatelessWidget {
-  TicketBottomNavBar({Key? key, required this.currentIndex, required this.onTap}) : super(key: key);
+  const TicketBottomNavBar({Key? key, required this.currentIndex, required this.onTap}) : super(key: key);
 
-  int currentIndex;
-  Function(int)? onTap;
+  final int currentIndex;
+  final Function(int)? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -17,8 +18,8 @@ class TicketBottomNavBar extends StatelessWidget {
       currentIndex: currentIndex,
       onTap: onTap,
       items: [
-        BottomNavigationBarItem(icon: Icon(Icons.home), label: context.text.tickets),
-        BottomNavigationBarItem(icon: Icon(Icons.book), label: context.text.vouchers),
+        BottomNavigationBarItem(icon: const Icon(FontAwesomeIcons.ticketSimple), label: context.text.tickets),
+        BottomNavigationBarItem(icon: const Icon(FontAwesomeIcons.ticket), label: context.text.vouchers),
       ],
     );
   }
