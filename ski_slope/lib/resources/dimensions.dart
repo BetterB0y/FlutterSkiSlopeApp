@@ -15,5 +15,7 @@ class Dimensions {
   static const double listVerticalPadding = 36.0;
   static const double skiSlopeElementRadius = 8.0;
   static const double appBarHorizontalPadding = 16.0;
-  static const double tapIconPadding = 12.0;
+  static const double appBarIconStartPadding = 2 * appBarHorizontalPadding;
+  static const double welcomePageButtonPadding = 150;
+  static const double welcomePageCorner = 20.0;
 }

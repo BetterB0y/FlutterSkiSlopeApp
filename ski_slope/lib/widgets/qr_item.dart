@@ -25,7 +25,6 @@ class QrItem extends StatelessWidget {
             QrImage(
               data: qrLink,
               version: QrVersions.auto,
-              size: MediaQuery.of(context).size.height * 0.45,
             ),
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: Dimensions.paddingBig),

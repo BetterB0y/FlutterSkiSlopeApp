@@ -4,5 +4,8 @@
   "tickets": "Bilety",
   "vouchers": "Karnety",
   "previous": "Poprzedni",
-  "next": "Następny"
+  "next": "Następny",
+  "welcomePrevious": "Cofnij",
+  "welcomeNext": "Dalej",
+  "login": "Zaloguj"
 }

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:ski_slope/pages/lift_screen.dart';
-import 'package:ski_slope/pages/main_screen.dart';
+import 'package:ski_slope/pages/welcome_screen.dart';
 import 'package:ski_slope/resources/colors.dart';
 import 'package:ski_slope/utilities/extensions.dart';
 
@@ -46,6 +45,6 @@ class _MyHomePageState extends State<MyHomePage> {
       DeviceOrientation.portraitUp,
     ]);
 
-    return MainScreen();
+    return const WelcomeScreen();
   }
 }

@@ -12,7 +12,7 @@ class QrScreen extends StatefulWidget {
 }
 
 class _QrScreenState extends State<QrScreen> {
-  int qrIndex = 0;
+  int _qrIndex = 0;
 
   final listOfItems = [
     const QrItem(
@@ -50,16 +50,16 @@ class _QrScreenState extends State<QrScreen> {
       )
       .toList();
 
-  void _nextQr() => setState(() => qrIndex++);
+  void _nextQr() => setState(() => _qrIndex++);
 
-  void _previousQr() => setState(() => qrIndex--);
+  void _previousQr() => setState(() => _qrIndex--);
 
   @override
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        listOfItems[qrIndex],
+        listOfItems[_qrIndex],
         Padding(
           padding: const EdgeInsets.all(Dimensions.paddingBig),
           child: Column(
@@ -71,14 +71,20 @@ class _QrScreenState extends State<QrScreen> {
                   ElevatedButton(
                     style:
                         ElevatedButton.styleFrom(primary: SkiColors.buttonsColor, onPrimary: SkiColors.additionalColor),
-                    onPressed: qrIndex == 0 ? null : _previousQr,
-                    child: Text(context.text.previous),
+                    onPressed: _qrIndex == 0 ? null : _previousQr,
+                    child: Padding(
+                      padding: const EdgeInsets.all(Dimensions.paddingSmall),
+                      child: Text(context.text.previous),
+                    ),
                   ),
                   ElevatedButton(
                     style:
                         ElevatedButton.styleFrom(primary: SkiColors.buttonsColor, onPrimary: SkiColors.additionalColor),
-                    onPressed: qrIndex == listOfItems.length - 1 ? null : _nextQr,
-                    child: Text(context.text.next),
+                    onPressed: _qrIndex == listOfItems.length - 1 ? null : _nextQr,
+                    child: Padding(
+                      padding: const EdgeInsets.all(Dimensions.paddingSmall),
+                      child: Text(context.text.next),
+                    ),
                   ),
                 ],
               ),

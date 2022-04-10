@@ -9,5 +9,11 @@
   "previous": "Previous",
   "@previous": {},
   "next": "Next",
-  "@next": {}
+  "@next": {},
+  "welcomePrevious": "Previous",
+  "@welcomePrevious": {},
+  "welcomeNext": "Next",
+  "@welcomeNext": {},
+  "login": "Login",
+  "@login": {}
 }

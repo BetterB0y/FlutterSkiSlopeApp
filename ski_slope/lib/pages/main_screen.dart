@@ -13,7 +13,7 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  int currentIndex = 0;
+  int _currentPage = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -22,10 +22,10 @@ class _MainScreenState extends State<MainScreen> {
           backgroundColor: SkiColors.mainColor,
           title: Text(context.text.appName),
         ),
-        body: currentIndex == 0 ? const LiftScreen() : const QrScreen(),
+        body: _currentPage == 0 ? const LiftScreen() : const QrScreen(),
         bottomNavigationBar: TicketBottomNavBar(
-          currentIndex: currentIndex,
-          onTap: (index) => setState(() => currentIndex = index),
+          currentIndex: _currentPage,
+          onTap: (index) => setState(() => _currentPage = index),
         ));
   }
 }

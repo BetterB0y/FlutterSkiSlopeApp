@@ -9,4 +9,9 @@ class SkiRadius {
     borderRadius: BorderRadius.circular(Dimensions.skiSlopeElementRadius),
     side: const BorderSide(color: SkiColors.mainColor),
   );
+
+  static BorderRadius welcomeScreenBorderRadius = const BorderRadius.only(
+    topRight: Radius.circular(Dimensions.welcomePageCorner),
+    topLeft: Radius.circular(Dimensions.welcomePageCorner),
+  );
 }
