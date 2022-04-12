@@ -11,6 +11,7 @@ class Dimensions {
   static const double paddingBig = 16.0;
   static const double paddingBigPlus = 20.0;
   static const double paddingDoubleBig = 32.0;
+  static const double paddingLarge = 40.0;
   static const double menuItemsPadding = 24.0;
   static const double listVerticalPadding = 36.0;
   static const double skiSlopeElementRadius = 8.0;
@@ -19,5 +20,4 @@ class Dimensions {
   static const double welcomePageButtonPadding = 150;
   static const double welcomePageCorner = 20.0;
   static const double loginSpacer = 30.0;
-  static const double outPaddingLoginScreen = 40.0;
 }

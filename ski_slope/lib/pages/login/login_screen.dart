@@ -37,7 +37,7 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       appBar: SkiAppBar(title: context.text.loginTitle),
       body: Padding(
-        padding: const EdgeInsets.all(Dimensions.outPaddingLoginScreen),
+        padding: const EdgeInsets.all(Dimensions.paddingLarge),
         child: Form(
           key: _formKey,
           child: Column(
@@ -73,12 +73,7 @@ class _LoginScreenState extends State<LoginScreen> {
               const SizedBox(height: Dimensions.loginSpacer),
               SkiButton(
                 onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    navigateToPage(
-                      context,
-                      builder: (context) => const MainScreen(),
-                    );
-                  }
+                  if (_formKey.currentState!.validate()) _navigateToMainScreen(context);
                 },
                 child: Text(context.text.login),
               ),
@@ -98,5 +93,13 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       ),
     );
+  }
+
+  void _navigateToMainScreen(BuildContext context) {
+    Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(
+          builder: (context) => const MainScreen(),
+        ),
+        (_) => false);
   }
 }

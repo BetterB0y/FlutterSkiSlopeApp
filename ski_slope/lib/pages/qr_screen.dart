@@ -41,14 +41,7 @@ class _QrScreenState extends State<QrScreen> {
       title: "Test5",
       description: "test5",
     ),
-  ]
-      .map<Widget>(
-        (item) => Padding(
-          padding: const EdgeInsets.symmetric(horizontal: Dimensions.menuItemsPadding),
-          child: item,
-        ),
-      )
-      .toList();
+  ].toList();
 
   void _nextQr() => setState(() => _qrIndex++);
 
@@ -56,38 +49,34 @@ class _QrScreenState extends State<QrScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        listOfItems[_qrIndex],
-        Padding(
-          padding: const EdgeInsets.all(Dimensions.paddingBig),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: Dimensions.paddingLarge),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisSize: MainAxisSize.max,
+        children: [
+          listOfItems[_qrIndex],
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  SkiButton(
-                    onPressed: _qrIndex == 0 ? null : _previousQr,
-                    child: Padding(
-                      padding: const EdgeInsets.all(Dimensions.paddingSmall),
-                      child: Text(context.text.previous),
-                    ),
-                  ),
-                  SkiButton(
-                    onPressed: _qrIndex == listOfItems.length - 1 ? null : _nextQr,
-                    child: Padding(
-                      padding: const EdgeInsets.all(Dimensions.paddingSmall),
-                      child: Text(context.text.next),
-                    ),
-                  ),
-                ],
+              SkiButton(
+                onPressed: _qrIndex == 0 ? null : _previousQr,
+                child: Padding(
+                  padding: const EdgeInsets.all(Dimensions.paddingSmall),
+                  child: Text(context.text.previous),
+                ),
+              ),
+              SkiButton(
+                onPressed: _qrIndex == listOfItems.length - 1 ? null : _nextQr,
+                child: Padding(
+                  padding: const EdgeInsets.all(Dimensions.paddingSmall),
+                  child: Text(context.text.next),
+                ),
               ),
             ],
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
