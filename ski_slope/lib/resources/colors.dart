@@ -7,5 +7,5 @@ class SkiColors {
   static const backgroundColor = Color(0xffffffff);
   static const additionalColor = Color(0xffedf7fe);
   static const buttonsColor = Color(0xff007cbb);
-// static const  = HexColor.fromHex("#002E3F");
+  static const errorColor = Colors.red;
 }

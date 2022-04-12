@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:ski_slope/resources/colors.dart';
 import 'package:ski_slope/resources/dimensions.dart';
 import 'package:ski_slope/utilities/extensions.dart';
 import 'package:ski_slope/widgets/qr_item.dart';
+import 'package:ski_slope/widgets/ski_button.dart';
 
 class QrScreen extends StatefulWidget {
   const QrScreen({Key? key}) : super(key: key);
@@ -68,18 +68,14 @@ class _QrScreenState extends State<QrScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  ElevatedButton(
-                    style:
-                        ElevatedButton.styleFrom(primary: SkiColors.buttonsColor, onPrimary: SkiColors.additionalColor),
+                  SkiButton(
                     onPressed: _qrIndex == 0 ? null : _previousQr,
                     child: Padding(
                       padding: const EdgeInsets.all(Dimensions.paddingSmall),
                       child: Text(context.text.previous),
                     ),
                   ),
-                  ElevatedButton(
-                    style:
-                        ElevatedButton.styleFrom(primary: SkiColors.buttonsColor, onPrimary: SkiColors.additionalColor),
+                  SkiButton(
                     onPressed: _qrIndex == listOfItems.length - 1 ? null : _nextQr,
                     child: Padding(
                       padding: const EdgeInsets.all(Dimensions.paddingSmall),

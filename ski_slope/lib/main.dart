@@ -19,8 +19,12 @@ class MyApp extends StatelessWidget {
       onGenerateTitle: (BuildContext context) => context.text.appName,
       theme: ThemeData(
         primarySwatch: Colors.blue,
-        scaffoldBackgroundColor: SkiColors.backgroundColor,
-      ),
+          scaffoldBackgroundColor: SkiColors.backgroundColor,
+          errorColor: SkiColors.errorColor,
+          colorScheme: ThemeData().colorScheme.copyWith(
+                primary: SkiColors.mainColor,
+                background: SkiColors.backgroundColor,
+              )),
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: const [
         Locale('en'),

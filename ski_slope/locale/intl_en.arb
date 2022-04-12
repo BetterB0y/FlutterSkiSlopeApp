@@ -15,5 +15,17 @@
   "welcomeNext": "Next",
   "@welcomeNext": {},
   "login": "Login",
-  "@login": {}
+  "@login": {},
+  "register": "Register",
+  "@register": {},
+  "loginTitle": "Login",
+  "@loginTitle": {},
+  "username": "Username",
+  "@username": {},
+  "password": "Password",
+  "@password": {},
+  "loginUsernameIncorrect": "Username is incorrect",
+  "@loginUsernameIncorrect": {},
+  "loginPasswordTooShort": "Password too short",
+  "@loginPasswordTooShort": {}
 }

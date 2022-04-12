@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:ski_slope/pages/main_screen.dart';
+import 'package:ski_slope/pages/login/login_screen.dart';
 import 'package:ski_slope/resources/colors.dart';
 import 'package:ski_slope/resources/dimensions.dart';
 import 'package:ski_slope/resources/durations.dart';
 import 'package:ski_slope/resources/ski_radius.dart';
 import 'package:ski_slope/utilities/extensions.dart';
 import 'package:ski_slope/utilities/navigation.dart';
+import 'package:ski_slope/widgets/ski_button.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({Key? key}) : super(key: key);
@@ -34,17 +35,12 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           fontWeight: FontWeight.w400,
         );
 
-    String headline = "";
-    String description = "";
-    if (_currentPage == 0) {
-      headline = "test1";
-      description = "opis1";
-    }
+    String headline = "test1";
+    String description = "test2";
     if (_currentPage == 1) {
       headline = "test2";
       description = "opis2";
-    }
-    if (_currentPage == 2) {
+    } else if (_currentPage == 2) {
       headline = "test3";
       description = "opis3";
     }
@@ -104,16 +100,16 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 mainAxisSize: MainAxisSize.max,
                 children: [
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.25,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          primary: SkiColors.buttonsColor, onPrimary: SkiColors.additionalColor),
-                      child: Padding(
-                        padding: const EdgeInsets.all(Dimensions.paddingSmall),
-                        child: Text(context.text.welcomePrevious),
+                  Flexible(
+                    child: FractionallySizedBox(
+                      widthFactor: 0.6,
+                      child: SkiButton(
+                        child: Padding(
+                          padding: const EdgeInsets.all(Dimensions.paddingSmall),
+                          child: Text(context.text.welcomePrevious),
+                        ),
+                        onPressed: _currentPage == 0 ? null : _previousPage,
                       ),
-                      onPressed: _currentPage == 0 ? null : _previousPage,
                     ),
                   ),
                   for (int i = 0; i < _welcomeImages.length; i++)
@@ -127,22 +123,23 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         shape: BoxShape.circle,
                       ),
                     ),
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.25,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          primary: SkiColors.buttonsColor, onPrimary: SkiColors.additionalColor),
-                      child: Padding(
-                        padding: const EdgeInsets.all(Dimensions.paddingSmall),
-                        child: Text(
-                            _currentPage == _welcomeImages.length - 1 ? context.text.login : context.text.welcomeNext),
+                  Flexible(
+                    child: FractionallySizedBox(
+                      widthFactor: 0.6,
+                      child: SkiButton(
+                        child: Padding(
+                          padding: const EdgeInsets.all(Dimensions.paddingSmall),
+                          child: Text(_currentPage == _welcomeImages.length - 1
+                              ? context.text.login
+                              : context.text.welcomeNext),
+                        ),
+                        onPressed: _currentPage == _welcomeImages.length - 1
+                            ? () => navigateToPage(
+                                  context,
+                                  builder: (context) => const LoginScreen(),
+                                )
+                            : _nextPage,
                       ),
-                      onPressed: _currentPage == _welcomeImages.length - 1
-                          ? () => navigateToPage(
-                                context,
-                                builder: (context) => const MainScreen(),
-                              )
-                          : _nextPage,
                     ),
                   ),
                 ],

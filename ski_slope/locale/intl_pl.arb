@@ -7,5 +7,11 @@
   "next": "Następny",
   "welcomePrevious": "Cofnij",
   "welcomeNext": "Dalej",
-  "login": "Zaloguj"
+  "login": "Zaloguj",
+  "register": "Zarejestruj się",
+  "loginTitle": "Logowanie",
+  "username": "Nazwa użytkownika",
+  "password": "Hasło",
+  "loginUsernameIncorrect": "Nieprawidłowa nazwa użytkownika",
+  "loginPasswordTooShort": "Hasło za krótkie"
 }
