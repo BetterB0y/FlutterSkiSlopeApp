@@ -13,5 +13,10 @@
   "username": "Nazwa użytkownika",
   "password": "Hasło",
   "loginUsernameIncorrect": "Nieprawidłowa nazwa użytkownika",
-  "loginPasswordTooShort": "Hasło za krótkie"
+  "loginPasswordTooShort": "Hasło za krótkie",
+  "userProfile": "Profil Użytkownika",
+  "email": "Email",
+  "name": "Imię",
+  "surname": "Nazwisko",
+  "logout": "Wyloguj"
 }

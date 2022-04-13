@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ski_slope/resources/colors.dart';
 
 class SkiButton extends StatelessWidget {
-  const SkiButton({Key? key, required this.onPressed, this.child, this.style}) : super(key: key);
+  const SkiButton({Key? key, required this.onPressed, required this.child, this.style}) : super(key: key);
   final VoidCallback? onPressed;
   final Widget? child;
   final ButtonStyle? style;

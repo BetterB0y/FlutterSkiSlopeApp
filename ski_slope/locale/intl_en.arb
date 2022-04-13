@@ -27,5 +27,15 @@
   "loginUsernameIncorrect": "Username is incorrect",
   "@loginUsernameIncorrect": {},
   "loginPasswordTooShort": "Password too short",
-  "@loginPasswordTooShort": {}
+  "@loginPasswordTooShort": {},
+  "userProfile": "User Profile",
+  "@userProfile": {},
+  "email": "Email",
+  "@email": {},
+  "name": "Name",
+  "@name": {},
+  "surname": "Surname",
+  "@surname": {},
+  "logout": "Logout",
+  "@logout": {}
 }
