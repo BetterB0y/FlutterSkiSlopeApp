@@ -63,10 +63,7 @@ class _SkiSlopeAppState extends State<SkiSlopeApp> {
                           background: SkiColors.backgroundColor,
                         )),
                 localizationsDelegates: AppLocalizations.localizationsDelegates,
-                supportedLocales: const [
-                  Locale('en'),
-                  Locale('pl'),
-                ],
+                supportedLocales: AppLocalizations.supportedLocales,
                 home: _AppPage(),
               ),
             ),
