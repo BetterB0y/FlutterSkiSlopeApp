@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:ski_slope/resources/colors.dart';
@@ -16,20 +15,21 @@ class QrItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Material(
       color: SkiColors.additionalColor,
-      shape: SkiRadius.roundedRectangleBorder,
-      child: Container(
-        width: MediaQuery.of(context).size.width * 0.85,
-        padding: const EdgeInsets.all(Dimensions.paddingMedium),
-        child: Column(
-          children: [
-            QrImage(
-              data: qrLink,
-              version: QrVersions.auto,
-            ),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: Dimensions.paddingBig),
-              child: Divider(),
-            ),
+        shape: SkiRadius.roundedRectangleBorder,
+        child: FractionallySizedBox(
+          widthFactor: 0.85,
+          child: Padding(
+            padding: const EdgeInsets.all(Dimensions.paddingMedium),
+            child: Column(
+              children: [
+                QrImage(
+                  data: qrLink,
+                  version: QrVersions.auto,
+                ),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: Dimensions.paddingBig),
+                  child: Divider(),
+                ),
             Padding(
               padding: const EdgeInsets.symmetric(
                 vertical: Dimensions.paddingSmall,
@@ -48,16 +48,16 @@ class QrItem extends StatelessWidget {
                 horizontal: Dimensions.paddingBig,
               ),
               child: Text(
-                description,
-                style: SkiTextStyle.bodyText1,
-                textAlign: TextAlign.justify,
-                maxLines: 4,
-                overflow: TextOverflow.ellipsis,
-              ),
+                    description,
+                    style: SkiTextStyle.bodyText1,
+                    textAlign: TextAlign.justify,
+                    maxLines: 4,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+              ],
             ),
-          ],
-        ),
-      ),
-    );
+          ),
+        ));
   }
 }

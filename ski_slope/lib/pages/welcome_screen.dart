@@ -35,14 +35,14 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           fontWeight: FontWeight.w400,
         );
 
-    String headline = "test1";
-    String description = "test2";
+    String headline = context.text.welcomeScreenHeadline1;
+    String description = context.text.welcomeScreenDescription1;
     if (_currentPage == 1) {
-      headline = "test2";
-      description = "opis2";
+      headline = context.text.welcomeScreenHeadline2;
+      description = context.text.welcomeScreenDescription2;
     } else if (_currentPage == 2) {
-      headline = "test3";
-      description = "opis3";
+      headline = context.text.welcomeScreenHeadline3;
+      description = context.text.welcomeScreenDescription3;
     }
 
     return Scaffold(
@@ -77,7 +77,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             style: const TextStyle(
               fontWeight: FontWeight.w600,
               color: SkiColors.buttonsColor,
-              fontSize: 30,
+              fontSize: 28,
               letterSpacing: 2,
             ),
           ),

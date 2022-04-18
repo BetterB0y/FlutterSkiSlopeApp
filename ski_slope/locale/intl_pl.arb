@@ -16,7 +16,15 @@
   "loginPasswordTooShort": "Hasło za krótkie",
   "userProfile": "Profil Użytkownika",
   "email": "Email",
-  "name": "Imię",
-  "surname": "Nazwisko",
-  "logout": "Wyloguj"
+  "firstName": "Imię",
+  "lastName": "Nazwisko",
+  "logout": "Wyloguj",
+  "welcomeScreenHeadline1": "Gotowy na dobrą zabawę?",
+  "welcomeScreenHeadline2": "Twórz wspomnienia!",
+  "welcomeScreenHeadline3": "Baw się dobrze na stoku!",
+  "welcomeScreenDescription1": "Opis1",
+  "welcomeScreenDescription2": "Opis2",
+  "welcomeScreenDescription3": "Opis3",
+  "incorrectLoginData": "Niepoprawne dane logowania",
+  "noInternetConnection": "Brak internetu"
 }

@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -10,4 +11,6 @@ extension IterableExt<T, R> on Iterable<T> {
       this.map<R>(map).toList(growable: growable);
 }
 
-void printError(Object? object) => print('\x1B[31m$object\x1B[0m');
+void printError(Object? object) {
+  if (kDebugMode) print('\x1B[31m$object\x1B[0m');
+}
