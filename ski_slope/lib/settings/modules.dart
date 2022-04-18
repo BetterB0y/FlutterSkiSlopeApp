@@ -1,5 +1,6 @@
 import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:event_bus/event_bus.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:ski_slope/app/app_bloc.dart';
 import 'package:ski_slope/data/api/auth_api.dart';
 import 'package:ski_slope/data/api/user_api.dart';
@@ -38,6 +39,9 @@ final services = [
   Dependency(
     (inject) => EventBus(),
   ),
+  Dependency(
+    (inject) => GoogleSignIn(),
+  ),
 ];
 
 final usecases = [
@@ -58,6 +62,7 @@ final usecases = [
 List<Bloc> get blocs => [
       Bloc(
         (inject) => LoginBloc(
+          inject.getDependency(),
           inject.getDependency(),
         ),
       ),

@@ -16,6 +16,8 @@
   "@welcomeNext": {},
   "login": "Login",
   "@login": {},
+  "loginWithGoogle": "Login with Google",
+  "@loginWithGoogle": {},
   "register": "Register",
   "@register": {},
   "loginTitle": "Login",

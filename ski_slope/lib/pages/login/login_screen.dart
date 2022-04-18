@@ -84,34 +84,51 @@ class _LoginScreenState extends State<LoginScreen> {
                       validator: (value) => value?.isPasswordValid ?? false ? null : context.text.loginPasswordTooShort,
                     ),
                     const SizedBox(height: Dimensions.loginSpacer),
-                    ConditionalBuilder(
-                      condition: (_bloc.state is! LoadingState),
-                      positiveBuilder: (context) => Wrap(
-                        direction: Axis.vertical,
-                        crossAxisAlignment: WrapCrossAlignment.center,
-                        children: [
-                          SkiButton(
-                            onPressed: () {
-                              if (_formKey.currentState!.validate()) _bloc.login();
-                            },
-                            child: Text(context.text.login),
-                          ),
-                          const SizedBox(height: Dimensions.loginSpacer / 3),
-                          SkiButton(
-                            style: ElevatedButton.styleFrom(
-                                primary: SkiColors.additionalColor, onPrimary: SkiColors.mainColor),
-                            onPressed: () => navigateToPage(
-                              context,
-                              builder: (context) => const SkiWebPage(
-                                url: "https://www.google.com",
+                    Consumer<LoginBloc>(
+                      builder: (context, bloc) => ConditionalBuilder(
+                        condition: (_bloc.state is! LoadingState),
+                        positiveBuilder: (context) => Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            SkiButton(
+                              onPressed: () {
+                                if (_formKey.currentState!.validate()) _bloc.login();
+                              },
+                              child: Text(context.text.login),
+                            ),
+                            const SizedBox(height: Dimensions.loginSpacer / 3),
+                            SkiButton(
+                              onPressed: () {
+                                _bloc.loginWithGoogle();
+                              },
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Image.asset("assets/login_screen/googleLogo.png", scale: 21),
+                                  const SizedBox(width: Dimensions.loginSpacer / 3),
+                                  Text(context.text.loginWithGoogle),
+                                ],
                               ),
                             ),
-                            child: Text(context.text.register),
-                          ),
-                        ],
-                      ),
-                      negativeBuilder: (context) => const Center(
-                        child: CircularProgressIndicator(),
+                            const Divider(height: Dimensions.loginSpacer / 3),
+                            SkiButton(
+                              style: ElevatedButton.styleFrom(
+                                  primary: SkiColors.additionalColor, onPrimary: SkiColors.mainColor),
+                              onPressed: () => navigateToPage(
+                                context,
+                                builder: (context) => const SkiWebPage(
+                                  //TODO change url to register site
+                                  url: "https://www.google.com",
+                                ),
+                              ),
+                              child: Text(context.text.register),
+                            ),
+                          ],
+                        ),
+                        negativeBuilder: (context) => const Center(
+                          child: CircularProgressIndicator(),
+                        ),
                       ),
                     )
                   ],
