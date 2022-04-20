@@ -44,57 +44,68 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       headline = context.text.welcomeScreenHeadline3;
       description = context.text.welcomeScreenDescription3;
     }
+    double screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
       body: Column(
         children: [
-          Stack(
-            alignment: Alignment.bottomCenter,
-            children: [
-              Row(
-                children: [
-                  Expanded(
-                    child: Image.asset(
-                      _welcomeImages[_currentPage],
-                      fit: BoxFit.cover,
-                      height: MediaQuery.of(context).size.height * 0.65,
-                      alignment: Alignment.topCenter,
+          Material(
+            color: SkiColors.backgroundColor,
+            child: Stack(
+              alignment: Alignment.bottomCenter,
+              children: [
+                Row(
+                  children: [
+                    Expanded(
+                      child: Image.asset(
+                        _welcomeImages[_currentPage],
+                        fit: BoxFit.cover,
+                        height: screenHeight > 600 ? screenHeight * 0.65 : screenHeight * 0.60,
+                        alignment: Alignment.topCenter,
+                      ),
                     ),
-                  ),
-                ],
-              ),
-              Container(
-                height: 20,
-                decoration: BoxDecoration(
-                  color: SkiColors.backgroundColor,
-                  borderRadius: SkiRadius.welcomeScreenBorderRadius,
+                  ],
                 ),
-              ),
-            ],
-          ),
-          Text(
-            headline,
-            style: const TextStyle(
-              fontWeight: FontWeight.w600,
-              color: SkiColors.buttonsColor,
-              fontSize: 28,
-              letterSpacing: 2,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(
-                horizontal: Dimensions.appBarIconStartPadding, vertical: Dimensions.paddingBig),
-            child: Text(
-              description,
-              style: _descriptionTextStyle,
-              textAlign: TextAlign.center,
-              maxLines: 6,
-              overflow: TextOverflow.ellipsis,
+                Container(
+                  height: 20,
+                  decoration: BoxDecoration(
+                    color: SkiColors.backgroundColor,
+                    borderRadius: SkiRadius.welcomeScreenBorderRadius,
+                  ),
+                ),
+              ],
             ),
           ),
           Expanded(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: Dimensions.paddingDoubleBig),
+            flex: 15,
+            child: Text(
+              headline,
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                fontWeight: FontWeight.w600,
+                color: SkiColors.buttonsColor,
+                fontSize: 28,
+                letterSpacing: 2,
+              ),
+            ),
+          ),
+          Expanded(
+            flex: 60,
+            child: Container(
+              alignment: Alignment.center,
+              padding: const EdgeInsets.symmetric(horizontal: 24),
+              child: Text(
+                description,
+                style: _descriptionTextStyle,
+                textAlign: TextAlign.center,
+                maxLines: 6,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+          ),
+          Expanded(
+            flex: 25,
+            child: Center(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.end,
@@ -104,10 +115,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     child: FractionallySizedBox(
                       widthFactor: 0.6,
                       child: SkiButton(
-                        child: Padding(
-                          padding: const EdgeInsets.all(Dimensions.paddingSmall),
-                          child: Text(context.text.welcomePrevious),
-                        ),
+                        child: Text(context.text.welcomePrevious),
                         onPressed: _currentPage == 0 ? null : _previousPage,
                       ),
                     ),
@@ -127,12 +135,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     child: FractionallySizedBox(
                       widthFactor: 0.6,
                       child: SkiButton(
-                        child: Padding(
-                          padding: const EdgeInsets.all(Dimensions.paddingSmall),
-                          child: Text(_currentPage == _welcomeImages.length - 1
-                              ? context.text.login
-                              : context.text.welcomeNext),
-                        ),
+                        child: Text(
+                            _currentPage == _welcomeImages.length - 1 ? context.text.login : context.text.welcomeNext),
                         onPressed: _currentPage == _welcomeImages.length - 1
                             ? () => navigateToPage(
                                   context,

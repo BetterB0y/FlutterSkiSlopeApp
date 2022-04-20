@@ -35,7 +35,7 @@ class ProfileScreen extends StatelessWidget {
       body: Center(
         child: FractionallySizedBox(
           widthFactor: 0.8,
-          heightFactor: 0.55,
+          heightFactor: MediaQuery.of(context).size.width * 0.0017,
           child: Material(
             color: SkiColors.additionalColor,
             shape: SkiRadius.roundedRectangleBorder,

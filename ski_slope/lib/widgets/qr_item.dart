@@ -17,7 +17,7 @@ class QrItem extends StatelessWidget {
       color: SkiColors.additionalColor,
         shape: SkiRadius.roundedRectangleBorder,
         child: FractionallySizedBox(
-          widthFactor: 0.85,
+          widthFactor: MediaQuery.of(context).size.height * 0.00105,
           child: Padding(
             padding: const EdgeInsets.all(Dimensions.paddingMedium),
             child: Column(

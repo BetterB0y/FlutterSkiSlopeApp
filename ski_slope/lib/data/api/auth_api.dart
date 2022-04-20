@@ -5,7 +5,6 @@ import 'package:ski_slope/data/api/mixin_api.dart';
 import 'package:ski_slope/data/api/model/auth_response.dart';
 import 'package:ski_slope/data/api/model/response.dart';
 import 'package:ski_slope/settings/settings.dart';
-import 'package:ski_slope/utilities/extensions.dart';
 
 class AuthApi with Api {
   static const username = "username";
@@ -18,8 +17,6 @@ class AuthApi with Api {
   }
 
   Future<Response> login(String userName, String password) {
-    printError("Username $userName");
-    printError("Password $password");
     return post(
       url: "${Api.baseUrl}login",
       body: {
