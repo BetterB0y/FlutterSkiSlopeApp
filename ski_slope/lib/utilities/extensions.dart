@@ -12,5 +12,5 @@ extension IterableExt<T, R> on Iterable<T> {
 }
 
 void printError(Object? object) {
-  if (kDebugMode) print('\x1B[31m$object\x1B[0m');
+  debugPrint('\x1B[31m$object\x1B[0m', wrapWidth: 1024);
 }

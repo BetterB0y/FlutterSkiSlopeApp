@@ -29,7 +29,7 @@ class UserRepository {
       } else if (response is AuthResponse) {
         final authData = AuthData.fromResponse(response);
         _settings.authResponseData = authData;
-        _settings.email = username;
+        _settings.username = username;
         return SuccessfulResult();
       }
       return UnsuccessfulResult();
