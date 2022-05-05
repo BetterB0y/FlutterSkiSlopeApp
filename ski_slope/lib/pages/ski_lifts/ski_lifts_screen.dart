@@ -32,7 +32,7 @@ class SkiLiftsScreen extends StatelessWidget {
           return ConditionalBuilder(
             condition: bloc.state is LoadingState,
             positiveBuilder: (context) => const Center(
-              child: CircularProgressIndicator.adaptive(),
+              child: CircularProgressIndicator(),
             ),
             negativeBuilder: (context) => RefreshList(
               isRefreshing: bloc.state is LoadingState,
