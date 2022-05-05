@@ -30,8 +30,8 @@ class AuthApi with Api {
   }
 
   Future<Response> refresh(String refreshToken) {
-    return post(
-      url: "${Api.baseUrl}/auth/refreshToken",
+    return get(
+      url: "${Api.baseUrl}auth/refreshToken",
       headers: {
         _authorization: _bearer + refreshToken,
       },

@@ -18,7 +18,4 @@ class UserResponse extends SuccessfulResponse {
         email = json['email'],
         firstName = json['firstName'],
         lastName = json['lastName'];
-
-  @override
-  List<Object?> get props => [username, email, firstName, lastName];
 }

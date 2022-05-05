@@ -37,7 +37,7 @@ class RefreshTokenImpl extends RefreshTokenUseCase {
           return SuccessfulResult.online();
         } else if (authResponse is NoInternetResponse && !_settings.isRefreshTokenExpired) {
           return SuccessfulResult.offline();
-        } else if (authResponse is StatusCodeNotHandledResponse && authResponse.statusCode == 400) {
+        } else if (authResponse is StatusCodeNotHandledResponse && authResponse.statusCode == 403) {
           _eventBus.fire(LogOutEvent());
           return UnsuccessfulResult();
         }

@@ -27,5 +27,8 @@
   "welcomeScreenDescription2": "Dbasz o środowisko? My również, dlatego zdecydowaliśmy się zrezygnować z tradycyjnych karnetów. Aby skorzystać z wyciągu, poprostu zeskanuj zakupiony przez internet karnet z kodem QR, który jest dostępny w aplikacji mobilnej. Koniec z szukaniem pomiętych biletów po kieszeniach!",
   "welcomeScreenDescription3": "Bez względu na to czy jesteś już zaawansowanym narciarzem, czy dopiero rozpoczynasz swoją przygodę z nartami, możesz wspaniale spędzić czas śmigając po naszych trasach o różnych stopniach trudności. Nowoczesne wyciągi sprawnie i bezpiecznie dostarczą Cię na szczyt stoku.",
   "incorrectLoginData": "Niepoprawne dane logowania",
-  "noInternetConnection": "Brak internetu"
+  "noInternetConnection": "Brak internetu",
+  "loginServerFail": "Usługa chwilowo niedostępna, spróbuj ponownie za chwilę",
+  "loadingSkiLiftsFail": "Ups! Coś poszło nie tak. Spróbuj ponownie za chwilę!",
+  "skiRunLength": "Długość trasy: "
 }

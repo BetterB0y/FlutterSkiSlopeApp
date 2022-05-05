@@ -7,7 +7,4 @@ class AuthResponse extends SuccessfulResponse {
   AuthResponse.fromJson(Map<String, dynamic> json)
       : accessToken = json['accessToken'],
         refreshToken = json['refreshToken'];
-
-  @override
-  List<Object?> get props => [accessToken, refreshToken];
 }

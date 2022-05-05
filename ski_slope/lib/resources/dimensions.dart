@@ -22,4 +22,6 @@ class Dimensions {
   static const double loginSpacer = 30.0;
   static const double profileIconPadding = 12.0;
   static const double profileIconSize = 80.0;
+  static const double refreshHeaderHeight = 150.0;
+  static const double refreshHeaderMargin = 55.0;
 }

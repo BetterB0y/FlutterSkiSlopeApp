@@ -7,7 +7,7 @@ import 'package:ski_slope/resources/colors.dart';
 import 'package:ski_slope/resources/dimensions.dart';
 import 'package:ski_slope/utilities/extensions.dart';
 import 'package:ski_slope/utilities/navigation.dart';
-import 'package:ski_slope/utilities/snackbar.dart';
+import 'package:ski_slope/utilities/snackbar_viewer.dart';
 import 'package:ski_slope/utilities/validation.dart';
 import 'package:ski_slope/widgets/conditional_builder.dart';
 import 'package:ski_slope/widgets/ski_app_bar.dart';
@@ -24,6 +24,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
   final LoginBloc _bloc = BlocProvider.getBloc();
+  final SnackBarViewer _snackBarViewer = BlocProvider.getDependency();
   bool _passwordVisible = false;
 
   @override
@@ -65,6 +66,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       cursorColor: SkiColors.mainColor,
                       validator: (value) =>
                           value?.isUserNameValid ?? false ? null : context.text.loginUsernameIncorrect,
+                      textInputAction: TextInputAction.next,
                     ),
                     const SizedBox(height: Dimensions.loginSpacer),
                     TextFormField(
@@ -82,6 +84,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       cursorColor: SkiColors.mainColor,
                       validator: (value) => value?.isPasswordValid ?? false ? null : context.text.loginPasswordTooShort,
+                      textInputAction: TextInputAction.done,
+                      onEditingComplete: _validateAndLogin,
                     ),
                     const SizedBox(height: Dimensions.loginSpacer),
                     Consumer<LoginBloc>(
@@ -91,9 +95,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             SkiButton(
-                              onPressed: () {
-                                if (_formKey.currentState!.validate()) _bloc.login();
-                              },
+                              onPressed: _validateAndLogin,
                               child: Text(context.text.login),
                             ),
                             const SizedBox(height: Dimensions.loginSpacer / 3),
@@ -141,6 +143,13 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
+  void _validateAndLogin() {
+    if (_formKey.currentState!.validate()) {
+      FocusManager.instance.primaryFocus?.unfocus();
+      _bloc.login();
+    }
+  }
+
   void _navigateToMainScreen(BuildContext context) {
     Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(
@@ -153,9 +162,11 @@ class _LoginScreenState extends State<LoginScreen> {
     if (state is SuccessState) {
       _navigateToMainScreen(context);
     } else if (state is IncorrectDataState) {
-      showSnackBar(context, context.text.incorrectLoginData);
+      _snackBarViewer.showSnackBar(context, context.text.incorrectLoginData);
     } else if (state is NoInternetState) {
-      showSnackBar(context, context.text.noInternetConnection);
+      _snackBarViewer.showSnackBar(context, context.text.noInternetConnection);
+    } else if (state is ServerFailState) {
+      _snackBarViewer.showSnackBar(context, context.text.loginServerFail);
     }
   }
 }

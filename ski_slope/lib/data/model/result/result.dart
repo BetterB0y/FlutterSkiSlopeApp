@@ -114,11 +114,11 @@ class OfflineSuccessfulDataResult<T> extends SuccessfulDataResult<T> implements 
 
 ///Errors
 abstract class ErrorResult extends Result {
-  ErrorResult._();
+  ErrorResult();
 
   factory ErrorResult.noInternet() => NoInternetConnectionResult._();
 }
 
 class NoInternetConnectionResult extends ErrorResult {
-  NoInternetConnectionResult._() : super._();
+  NoInternetConnectionResult._() : super();
 }

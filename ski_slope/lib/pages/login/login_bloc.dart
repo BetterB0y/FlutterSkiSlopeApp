@@ -28,6 +28,8 @@ class LoginBloc extends StatedBloc<LoginState> {
     } else if (loginResult is LoginFailedByInternet) {
       setState(NoInternetState());
     } else if (loginResult is LoginFailed) {
+      setState(ServerFailState());
+    } else if (loginResult is IncorrectLoginData) {
       setState(IncorrectDataState());
     }
   }
@@ -51,3 +53,5 @@ class SuccessState extends LoginState {}
 class NoInternetState extends LoginState {}
 
 class IncorrectDataState extends LoginState {}
+
+class ServerFailState extends LoginState {}

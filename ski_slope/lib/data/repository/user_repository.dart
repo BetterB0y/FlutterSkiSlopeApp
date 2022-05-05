@@ -31,6 +31,8 @@ class UserRepository {
         _settings.authResponseData = authData;
         _settings.username = username;
         return SuccessfulResult();
+      } else if (response is UnauthorizedResponse) {
+        return WrongUserDataResult();
       }
       return UnsuccessfulResult();
     });
@@ -67,3 +69,5 @@ extension UserConverter on UserResponse {
         lastName: lastName,
       );
 }
+
+class WrongUserDataResult extends ErrorResult {}

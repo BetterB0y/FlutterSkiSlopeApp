@@ -55,5 +55,11 @@
   "incorrectLoginData": "Incorrect login data",
   "@incorrectLoginData": {},
   "noInternetConnection": "No internet connection",
-  "@noInternetConnection": {}
+  "@noInternetConnection": {},
+  "loginServerFail": "Service temporarily unavailable, please try again in a moment",
+  "@loginServerFail": {},
+  "loadingSkiLiftsFail": "Ups! Something went wrong. Try again later!",
+  "@loadingSkiLiftsFail": {},
+  "skiRunLength": "Ski slope length: ",
+  "@skiRunLength": {}
 }
