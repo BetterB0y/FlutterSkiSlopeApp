@@ -9,6 +9,7 @@ class SnackBarViewer {
       _oldMessage = message;
       Flushbar(
         message: message,
+        isDismissible: false,
         duration: const Duration(seconds: 4),
         onStatusChanged: (FlushbarStatus? status) {
           if (status == FlushbarStatus.IS_HIDING) {

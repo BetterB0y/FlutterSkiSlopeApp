@@ -10,9 +10,8 @@ import 'package:ski_slope/settings/settings.dart';
 
 class UserRepository {
   final AuthApi _api;
-  final Settings _settings;
-
   final UserApi _userApi;
+  final Settings _settings;
 
   UserRepository(
     this._api,
@@ -70,4 +69,7 @@ extension UserConverter on UserResponse {
       );
 }
 
-class WrongUserDataResult extends ErrorResult {}
+class WrongUserDataResult extends ErrorResult {
+  @override
+  List<Object?> get props => [];
+}

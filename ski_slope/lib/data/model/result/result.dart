@@ -1,20 +1,15 @@
-import 'package:collection/collection.dart';
+import 'package:equatable/equatable.dart';
 
 typedef FutureResult = Future<Result>;
 
 typedef FutureDataResult<T> = Future<DataResult<T>>;
 
 /// Result of action
-abstract class Result {
-  @override
-  bool operator ==(Object other) => identical(this, other) || other is Result && runtimeType == other.runtimeType;
-
-  @override
-  int get hashCode => 0;
-}
+abstract class Result extends Equatable {}
 
 class UnsuccessfulResult extends Result {
-  UnsuccessfulResult() : super();
+  @override
+  List<Object?> get props => [];
 }
 
 class SuccessfulResult extends Result {
@@ -23,6 +18,9 @@ class SuccessfulResult extends Result {
   factory SuccessfulResult.online() => OnlineSuccessfulResult._();
 
   factory SuccessfulResult.offline() => OfflineSuccessfulResult._();
+
+  @override
+  List<Object?> get props => [];
 }
 
 /// Result of action with data
@@ -30,18 +28,6 @@ abstract class DataResult<T> extends Result {
   final T data;
 
   DataResult._(this.data);
-
-  @override
-  bool operator ==(Object other) {
-    final eq = const UnorderedIterableEquality().equals;
-    return identical(this, other) ||
-        other is DataResult &&
-            runtimeType == other.runtimeType &&
-            ((data is List && other.data is List && eq((data as List), (other.data as List))) || data == other.data);
-  }
-
-  @override
-  int get hashCode => data.hashCode;
 }
 
 class SuccessfulDataResult<T> extends DataResult<T> {
@@ -52,15 +38,14 @@ class SuccessfulDataResult<T> extends DataResult<T> {
   factory SuccessfulDataResult.offline(T data) => OfflineSuccessfulDataResult._(data);
 
   @override
-  bool operator ==(Object other) =>
-      identical(this, other) || super == other && other is SuccessfulDataResult && runtimeType == other.runtimeType;
-
-  @override
-  int get hashCode => super.hashCode;
+  List<Object?> get props => [data];
 }
 
 class UnsuccessfulDataResult<T> extends DataResult<T> {
   UnsuccessfulDataResult(T data) : super._(data);
+
+  @override
+  List<Object?> get props => [data];
 }
 
 /// Internet status
@@ -82,34 +67,14 @@ class OnlineSuccessfulDataResult<T> extends SuccessfulDataResult<T> implements O
   OnlineSuccessfulDataResult._(T data) : super(data);
 
   @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      super == other && other is OnlineSuccessfulDataResult && runtimeType == other.runtimeType;
-
-  @override
-  int get hashCode => super.hashCode;
-
-  @override
-  String toString() {
-    return 'OnlineSuccessfulDataResult{$data}';
-  }
+  List<Object?> get props => [data];
 }
 
 class OfflineSuccessfulDataResult<T> extends SuccessfulDataResult<T> implements Offline {
   OfflineSuccessfulDataResult._(T data) : super(data);
 
   @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      super == other && other is OfflineSuccessfulDataResult && runtimeType == other.runtimeType;
-
-  @override
-  int get hashCode => super.hashCode;
-
-  @override
-  String toString() {
-    return 'OfflineSuccessfulDataResult{$data}';
-  }
+  List<Object?> get props => [data];
 }
 
 ///Errors
@@ -121,4 +86,7 @@ abstract class ErrorResult extends Result {
 
 class NoInternetConnectionResult extends ErrorResult {
   NoInternetConnectionResult._() : super();
+
+  @override
+  List<Object?> get props => [];
 }

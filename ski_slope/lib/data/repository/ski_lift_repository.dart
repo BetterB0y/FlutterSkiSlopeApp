@@ -15,7 +15,7 @@ class SkiLiftRepository {
       final skiLiftData = response.skiLifts.mapToList((element) => element.toSkiLiftData());
       return SuccessfulDataResult.online(skiLiftData);
     } else {
-      return UnsuccessfulDataResult([]);
+      return UnsuccessfulDataResult(const []);
     }
   }
 }

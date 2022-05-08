@@ -11,8 +11,10 @@ class LoginImpl extends LoginUseCase {
   final Settings _settings;
   final UserRepository _userRepository;
 
-  LoginImpl(this._settings,
-      this._userRepository,);
+  LoginImpl(
+    this._settings,
+    this._userRepository,
+  );
 
   @override
   Future<LoginResult> execute(String username, String password) async {
