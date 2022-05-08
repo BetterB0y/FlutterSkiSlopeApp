@@ -1,6 +1,5 @@
 import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:event_bus/event_bus.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:ski_slope/app/app_bloc.dart';
 import 'package:ski_slope/data/api/auth_api.dart';
 import 'package:ski_slope/data/api/ski_lift_api.dart';
@@ -55,9 +54,6 @@ final apis = [
 final services = [
   Dependency(
     (_) => EventBus(),
-  ),
-  Dependency(
-    (_) => GoogleSignIn(),
   ),
   Dependency(
     (_) => SnackBarViewer(),
