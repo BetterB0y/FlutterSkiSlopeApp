@@ -37,9 +37,20 @@ class UserRepository {
     });
   }
 
-  FutureDataResult<UserData> getUserData() async {
+  FutureResult loginWithGoogle(String url) async {
+    final accessToken = Uri.parse(url).queryParameters['accessToken'];
+    final refreshToken = Uri.parse(url).queryParameters['refreshToken'];
+    if (accessToken != null && refreshToken != null) {
+      _settings.authResponseData = AuthData(accessToken, refreshToken);
+      await getUserData(true);
+      return SuccessfulResult();
+    }
+    return UnsuccessfulResult();
+  }
+
+  FutureDataResult<UserData> getUserData(bool isGoogleAuth) async {
     final user = _settings.userData;
-    if (user == null) {
+    if (user == null || isGoogleAuth) {
       final response = await _userApi.getUserInfo();
       if (response is UserResponse) {
         final userData = response.toUserData();

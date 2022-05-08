@@ -4,7 +4,9 @@ import 'package:ski_slope/data/repository/user_repository.dart';
 import 'package:ski_slope/settings/settings.dart';
 
 abstract class LoginUseCase {
-  Future<LoginResult> execute(String username, String password);
+  Future<LoginResult> login(String username, String password);
+
+  Future<LoginResult> loginWithGoogle(String url);
 }
 
 class LoginImpl extends LoginUseCase {
@@ -17,7 +19,7 @@ class LoginImpl extends LoginUseCase {
   );
 
   @override
-  Future<LoginResult> execute(String username, String password) async {
+  Future<LoginResult> login(String username, String password) async {
     final oldUsername = _settings.username;
     final authResult = await _userRepository.login(username, password);
 
@@ -25,7 +27,7 @@ class LoginImpl extends LoginUseCase {
       _settings.userData = null;
     }
     if (authResult is SuccessfulResult) {
-      await _userRepository.getUserData();
+      await _userRepository.getUserData(false);
       return LoginSuccess();
     } else if (authResult is NoInternetConnectionResult) {
       return LoginFailedByInternet();
@@ -33,6 +35,16 @@ class LoginImpl extends LoginUseCase {
       return IncorrectLoginData();
     }
     return LoginFailed();
+  }
+
+  @override
+  Future<LoginResult> loginWithGoogle(String url) async {
+    final authResult = await _userRepository.loginWithGoogle(url);
+    if (authResult is SuccessfulResult) {
+      return LoginSuccess();
+    } else {
+      return LoginFailed();
+    }
   }
 }
 

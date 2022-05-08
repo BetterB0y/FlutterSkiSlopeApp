@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:flutter/material.dart';
 import 'package:ski_slope/base/bloc_listener.dart';
@@ -65,7 +67,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       cursorColor: SkiColors.mainColor,
                       validator: (value) =>
-                          value?.isUserNameValid ?? false ? null : context.text.loginUsernameIncorrect,
+                      value?.isUserNameValid ?? false ? null : context.text.loginUsernameIncorrect,
                       textInputAction: TextInputAction.next,
                     ),
                     const SizedBox(height: Dimensions.loginSpacer),
@@ -100,8 +102,27 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                             const SizedBox(height: Dimensions.loginSpacer / 3),
                             SkiButton(
-                              onPressed: () {
-                                _bloc.loginWithGoogle();
+                              onPressed: () async {
+                                bool isConnected = await _bloc.isConnected();
+                                if (isConnected) {
+                                  navigateToPage(
+                                    context,
+                                    builder: (context) => SkiWebPage(
+                                      appBarTitle: context.text.loginWithGooglePage,
+                                      isGoogleAuth: true,
+                                      userAgent: Platform.isIOS
+                                          ? 'Mozilla/5.0 (iPhone; CPU iPhone OS 13_1_2 like Mac OS X) AppleWebKit/605.1.15'
+                                              ' (KHTML, like Gecko) Version/13.0.1 Mobile/15E148 Safari/604.1'
+                                          : 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) '
+                                              'AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Mobile Safari/537.36',
+                                      onPageFinished: (url) {
+                                        _bloc.loginWithGoogle(url);
+                                      },
+                                      url:
+                                          "https://projekt-pp-tab-2022.herokuapp.com/oauth2/authorize/google?redirect_uri=https://projekt-pp-tab-2022.herokuapp.com/api/auth/test/everyone",
+                                    ),
+                                  );
+                                }
                               },
                               child: Row(
                                 mainAxisSize: MainAxisSize.min,
@@ -155,7 +176,7 @@ class _LoginScreenState extends State<LoginScreen> {
         MaterialPageRoute(
           builder: (context) => const MainScreen(),
         ),
-        (_) => false);
+            (_) => false);
   }
 
   void onStateChanged(BuildContext context, LoginState state) {

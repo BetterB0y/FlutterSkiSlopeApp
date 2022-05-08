@@ -3,9 +3,17 @@ import 'package:ski_slope/resources/dimensions.dart';
 import 'package:ski_slope/widgets/profile_icon.dart';
 
 class SkiAppBar extends StatelessWidget with PreferredSizeWidget {
-  const SkiAppBar({Key? key, this.title = "", this.isProfileVisible = false, this.onTap}) : super(key: key);
+  const SkiAppBar({
+    Key? key,
+    this.title = "",
+    this.isProfileVisible = false,
+    this.isGoogleAuth = false,
+    this.onTap,
+  }) : super(key: key);
+
   final String title;
   final bool isProfileVisible;
+  final bool isGoogleAuth;
   final GestureTapCallback? onTap;
 
   @override
@@ -18,6 +26,7 @@ class SkiAppBar extends StatelessWidget with PreferredSizeWidget {
           if (isProfileVisible) ProfileIcon(onTap: onTap),
         ],
       ),
+      automaticallyImplyLeading: !isGoogleAuth,
     );
   }
 

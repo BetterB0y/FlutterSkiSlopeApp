@@ -81,13 +81,13 @@ void main() {
     });
   });
 
-  group('get user data', () {
+  group('get user data from form', () {
     test('should return user data from settings', () async {
       const userData = UserData(username: "", email: "", firstName: "", lastName: "");
       when(_settings.userData).thenReturn(userData);
 
       await expectLater(
-        _repository.getUserData(),
+        _repository.getUserData(false),
         completion(SuccessfulDataResult.offline(userData)),
       );
 
@@ -109,7 +109,7 @@ void main() {
       when(_userApi.getUserInfo()).thenAnswer((_) async => response);
 
       await expectLater(
-        _repository.getUserData(),
+        _repository.getUserData(false),
         completion(SuccessfulDataResult.online(response.toUserData())),
       );
 
@@ -130,7 +130,7 @@ void main() {
       when(_userApi.getUserInfo()).thenAnswer((_) async => GeneralErrorResponse(Exception()));
 
       await expectLater(
-        _repository.getUserData(),
+        _repository.getUserData(false),
         completion(UnsuccessfulDataResult(const UserData(username: "", email: "", firstName: "", lastName: ""))),
       );
 

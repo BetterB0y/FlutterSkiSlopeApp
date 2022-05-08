@@ -95,7 +95,6 @@ List<Bloc> get blocs => [
       Bloc(
         (inject) => LoginBloc(
           inject.getDependency(),
-          inject.getDependency(),
         ),
       ),
       Bloc(

@@ -1,10 +1,10 @@
-import 'package:google_sign_in/google_sign_in.dart';
+import 'package:flutter/material.dart';
+import 'package:simple_connection_checker/simple_connection_checker.dart';
 import 'package:ski_slope/base/stated_bloc.dart';
 import 'package:ski_slope/pages/login/usecase/login_usecase.dart';
 
 class LoginBloc extends StatedBloc<LoginState> {
-  final LoginUseCase _login;
-  final GoogleSignIn _googleSignIn;
+  final LoginUseCase _loginUseCase;
 
   String _username = "";
 
@@ -13,14 +13,14 @@ class LoginBloc extends StatedBloc<LoginState> {
 
   set password(String password) => _password = password.trim();
 
-  LoginBloc(this._login, this._googleSignIn);
+  LoginBloc(this._loginUseCase);
 
   @override
   LoginState get defaultState => InitState();
 
   Future login() async {
     setState(LoadingState());
-    final loginResult = await _login.execute(_username, _password);
+    final loginResult = await _loginUseCase.login(_username, _password);
 
     if (loginResult is LoginSuccess) {
       setState(SuccessState());
@@ -34,11 +34,22 @@ class LoginBloc extends StatedBloc<LoginState> {
     }
   }
 
-  Future loginWithGoogle() async {
-    setState(LoadingState());
-    final loginResult = await _googleSignIn.signIn();
-    //TODO login with google;
-    setState(IncorrectDataState());
+  Future<bool> isConnected() async {
+    bool isConnected = await SimpleConnectionChecker.isConnectedToInternet();
+    if (!isConnected) {
+      setState(NoInternetState());
+    }
+    return isConnected;
+  }
+
+  Future loginWithGoogle(String url) async {
+    final loginResult = await _loginUseCase.loginWithGoogle(url);
+
+    if (loginResult is LoginSuccess) {
+      debugPrint("GoogleAuth url: $url");
+      setState(SuccessState());
+      _username = _password = "";
+    }
   }
 }
 

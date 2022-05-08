@@ -18,6 +18,8 @@
   "@login": {},
   "loginWithGoogle": "Login with Google",
   "@loginWithGoogle": {},
+  "loginWithGooglePage": "Login with Google",
+  "@loginWithGooglePage": {},
   "register": "Register",
   "@register": {},
   "loginTitle": "Login",
