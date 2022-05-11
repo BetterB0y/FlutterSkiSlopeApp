@@ -266,10 +266,9 @@ class MockUserRepository extends _i1.Mock implements _i13.UserRepository {
       returnValue: Future<_i3.Result>.value(_FakeResult_1())) as _i8.Future<_i3.Result>);
 
   @override
-  _i8.Future<_i3.DataResult<_i5.UserData>> getUserData(bool? isGoogleAuth) =>
-      (super.noSuchMethod(Invocation.method(#getUserData, [isGoogleAuth]),
-              returnValue: Future<_i3.DataResult<_i5.UserData>>.value(_FakeDataResult_2<_i5.UserData>()))
-          as _i8.Future<_i3.DataResult<_i5.UserData>>);
+  _i8.Future<_i3.DataResult<_i5.UserData>> getUserData() => (super.noSuchMethod(Invocation.method(#getUserData, []),
+          returnValue: Future<_i3.DataResult<_i5.UserData>>.value(_FakeDataResult_2<_i5.UserData>()))
+      as _i8.Future<_i3.DataResult<_i5.UserData>>);
 }
 
 /// A class which mocks [SkiLiftRepository].
