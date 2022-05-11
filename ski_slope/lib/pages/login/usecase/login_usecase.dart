@@ -20,14 +20,11 @@ class LoginImpl extends LoginUseCase {
 
   @override
   Future<LoginResult> login(String username, String password) async {
-    final oldUsername = _settings.username;
     final authResult = await _userRepository.login(username, password);
 
-    if (authResult is SuccessfulResult && oldUsername != username) {
-      _settings.userData = null;
-    }
     if (authResult is SuccessfulResult) {
-      await _userRepository.getUserData(false);
+      _settings.userData = null;
+      await _userRepository.getUserData();
       return LoginSuccess();
     } else if (authResult is NoInternetConnectionResult) {
       return LoginFailedByInternet();
@@ -41,6 +38,7 @@ class LoginImpl extends LoginUseCase {
   Future<LoginResult> loginWithGoogle(String url) async {
     final authResult = await _userRepository.loginWithGoogle(url);
     if (authResult is SuccessfulResult) {
+      await _userRepository.getUserData();
       return LoginSuccess();
     } else {
       return LoginFailed();

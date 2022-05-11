@@ -42,15 +42,14 @@ class UserRepository {
     final refreshToken = Uri.parse(url).queryParameters['refreshToken'];
     if (accessToken != null && refreshToken != null) {
       _settings.authResponseData = AuthData(accessToken, refreshToken);
-      await getUserData(true);
       return SuccessfulResult();
     }
     return UnsuccessfulResult();
   }
 
-  FutureDataResult<UserData> getUserData(bool isGoogleAuth) async {
+  FutureDataResult<UserData> getUserData() async {
     final user = _settings.userData;
-    if (user == null || isGoogleAuth) {
+    if (user == null) {
       final response = await _userApi.getUserInfo();
       if (response is UserResponse) {
         final userData = response.toUserData();

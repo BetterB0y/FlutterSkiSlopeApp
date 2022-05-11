@@ -28,7 +28,7 @@ dependencies:
 
   cupertino_icons: ^1.0.4
   bloc_pattern: ^3.0.0+1
-  shared_preferences: ^2.0.13
+  shared_preferences: ^2.0.14
   http: ^0.13.4
   qr_flutter: ^4.0.0
   font_awesome_flutter: ^10.1.0
