@@ -26,7 +26,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
   final LoginBloc _bloc = BlocProvider.getBloc();
-  final SnackBarViewer _snackBarViewer = BlocProvider.getDependency();
+  final SnackBarViewer _snackBarViewer = SnackBarViewer();
   bool _passwordVisible = false;
 
   @override

@@ -7,7 +7,7 @@ typedef FutureDataResult<T> = Future<DataResult<T>>;
 /// Result of action
 abstract class Result extends Equatable {}
 
-class UnsuccessfulResult extends Result {
+class UnsuccessfulResult extends ErrorResult {
   @override
   List<Object?> get props => [];
 }

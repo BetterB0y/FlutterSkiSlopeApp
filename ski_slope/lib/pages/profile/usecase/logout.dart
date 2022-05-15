@@ -16,6 +16,7 @@ class LogOutImpl extends LogOutUseCase {
   @override
   void execute() async {
     _settings.authResponseData = AuthData.empty();
+    _settings.userData = null;
     _eventBus.fire(LogOutEvent());
   }
 }

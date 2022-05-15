@@ -19,7 +19,6 @@ void main() {
   });
 
   setUp(() {
-    when(_settings.username).thenReturn("oldUsername");
     clearInteractions(_settings);
     clearInteractions(_userRepository);
   });
@@ -33,16 +32,14 @@ void main() {
         completion(LoginFailedByInternet()),
       );
 
-      verify(_settings.username).called(1);
-      verifyNoMoreInteractions(_settings);
       verify(_userRepository.login(any, any)).called(1);
       verifyNoMoreInteractions(_userRepository);
+      verifyZeroInteractions(_settings);
     });
 
-    test('should clear user data and return LoginSuccess when logging in with different username then previously',
-        () async {
+    test('should clear user data and return LoginSuccess when logging in', () async {
       when(_userRepository.login(any, any)).thenAnswer((_) async => SuccessfulResult());
-      when(_userRepository.getUserData(false)).thenAnswer((_) async => SuccessfulDataResult.online(const UserData(
+      when(_userRepository.getUserData()).thenAnswer((_) async => SuccessfulDataResult.online(const UserData(
             username: "username",
             email: "test.email@gmail.com",
             firstName: "firstName",
@@ -54,35 +51,10 @@ void main() {
         completion(LoginSuccess()),
       );
 
-      verify(_settings.username).called(1);
       verify(_settings.userData = null).called(1);
       verifyNoMoreInteractions(_settings);
       verify(_userRepository.login(any, any)).called(1);
-      verify(_userRepository.getUserData(false)).called(1);
-      verifyNoMoreInteractions(_userRepository);
-    });
-
-    test('should not clear user data and return LoginSuccess when logging in with the same username as previously',
-        () async {
-      when(_userRepository.login(any, any)).thenAnswer((_) async => SuccessfulResult());
-      when(_userRepository.getUserData(false)).thenAnswer((_) async => SuccessfulDataResult.online(const UserData(
-            username: "username",
-            email: "test.email@gmail.com",
-            firstName: "firstName",
-            lastName: "lastName",
-          )));
-      when(_settings.username).thenReturn("username");
-
-      await expectLater(
-        useCase.login("username", "password"),
-        completion(LoginSuccess()),
-      );
-
-      verify(_settings.username).called(1);
-      verifyNever(_settings.userData = null);
-      verifyNoMoreInteractions(_settings);
-      verify(_userRepository.login(any, any)).called(1);
-      verify(_userRepository.getUserData(false)).called(1);
+      verify(_userRepository.getUserData()).called(1);
       verifyNoMoreInteractions(_userRepository);
     });
 
@@ -94,10 +66,9 @@ void main() {
         completion(LoginFailed()),
       );
 
-      verify(_settings.username).called(1);
-      verifyNoMoreInteractions(_settings);
       verify(_userRepository.login(any, any)).called(1);
       verifyNoMoreInteractions(_userRepository);
+      verifyZeroInteractions(_settings);
     });
   });
 }

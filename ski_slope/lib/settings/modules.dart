@@ -11,9 +11,9 @@ import 'package:ski_slope/pages/login/login_bloc.dart';
 import 'package:ski_slope/pages/login/usecase/login_usecase.dart';
 import 'package:ski_slope/pages/profile/profile_bloc.dart';
 import 'package:ski_slope/pages/profile/usecase/logout.dart';
+import 'package:ski_slope/pages/profile/usecase/user_data.dart';
 import 'package:ski_slope/pages/ski_lifts/ski_lifts_bloc.dart';
 import 'package:ski_slope/pages/ski_lifts/usecase/load_ski_lifts.dart';
-import 'package:ski_slope/utilities/snackbar_viewer.dart';
 
 final repositories = [
   Dependency(
@@ -55,9 +55,6 @@ final services = [
   Dependency(
     (_) => EventBus(),
   ),
-  Dependency(
-    (_) => SnackBarViewer(),
-  ),
 ];
 
 final usecases = [
@@ -70,6 +67,11 @@ final usecases = [
   Dependency<LogOutUseCase>(
     (inject) => LogOutImpl(
       inject.getDependency(),
+      inject.getDependency(),
+    ),
+  ),
+  Dependency<UserDataUseCase>(
+    (inject) => UserDataImpl(
       inject.getDependency(),
     ),
   ),
@@ -100,6 +102,7 @@ List<Bloc> get blocs => [
       ),
       Bloc(
         (inject) => ProfileBloc(
+          inject.getDependency(),
           inject.getDependency(),
         ),
       ),

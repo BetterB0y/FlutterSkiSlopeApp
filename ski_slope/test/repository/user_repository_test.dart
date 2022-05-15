@@ -85,16 +85,18 @@ void main() {
     test('should return user data from settings', () async {
       const userData = UserData(username: "", email: "", firstName: "", lastName: "");
       when(_settings.userData).thenReturn(userData);
+      when(_userApi.getUserInfo()).thenAnswer((_) async => NoInternetResponse());
 
       await expectLater(
-        _repository.getUserData(false),
+        _repository.getUserData(),
         completion(SuccessfulDataResult.offline(userData)),
       );
 
       verify(_settings.userData).called(1);
+      verify(_userApi.getUserInfo()).called(1);
       verifyNoMoreInteractions(_settings);
+      verifyNoMoreInteractions(_userApi);
       verifyZeroInteractions(_authApi);
-      verifyZeroInteractions(_userApi);
     });
 
     test('should return user data downloaded from api and save in settings', () async {
@@ -109,7 +111,7 @@ void main() {
       when(_userApi.getUserInfo()).thenAnswer((_) async => response);
 
       await expectLater(
-        _repository.getUserData(false),
+        _repository.getUserData(),
         completion(SuccessfulDataResult.online(response.toUserData())),
       );
 
@@ -130,7 +132,7 @@ void main() {
       when(_userApi.getUserInfo()).thenAnswer((_) async => GeneralErrorResponse(Exception()));
 
       await expectLater(
-        _repository.getUserData(false),
+        _repository.getUserData(),
         completion(UnsuccessfulDataResult(const UserData(username: "", email: "", firstName: "", lastName: ""))),
       );
 

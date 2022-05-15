@@ -17,14 +17,12 @@ class SkiLiftsScreen extends StatelessWidget {
     BlocProvider.getBloc<SkiLiftsBloc>().load();
   }
 
-  final SnackBarViewer _snackBarViewer = BlocProvider.getDependency();
-
   @override
   Widget build(BuildContext context) {
     return BlocListener<SkiLiftsBloc>(
       onChanged: (state) {
         if (state is ErrorState) {
-          _snackBarViewer.showSnackBar(context, context.text.loadingSkiLiftsFail);
+          SnackBarViewer().showSnackBar(context, context.text.loadingSkiLiftsFail);
         }
       },
       builder: (context) => Consumer<SkiLiftsBloc>(

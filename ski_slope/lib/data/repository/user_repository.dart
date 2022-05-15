@@ -49,13 +49,14 @@ class UserRepository {
 
   FutureDataResult<UserData> getUserData() async {
     final user = _settings.userData;
-    if (user == null) {
-      final response = await _userApi.getUserInfo();
-      if (response is UserResponse) {
-        final userData = response.toUserData();
-        _settings.userData = userData;
-        return SuccessfulDataResult.online(userData);
-      }
+    final response = await _userApi.getUserInfo();
+    if (response is UserResponse) {
+      final userData = response.toUserData();
+      _settings.userData = userData;
+      return SuccessfulDataResult.online(userData);
+    } else if (user != null) {
+      return SuccessfulDataResult.offline(user);
+    } else {
       return UnsuccessfulDataResult(
         UserData(
           username: _settings.username ?? "",
@@ -64,8 +65,6 @@ class UserRepository {
           lastName: _settings.lastName ?? "",
         ),
       );
-    } else {
-      return SuccessfulDataResult.offline(user);
     }
   }
 }
