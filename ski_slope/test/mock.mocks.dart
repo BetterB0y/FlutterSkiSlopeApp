@@ -53,27 +53,21 @@ class MockSettings extends _i1.Mock implements _i4.Settings {
   @override
   set firstName(String? value) =>
       super.noSuchMethod(Invocation.setter(#firstName, value), returnValueForMissingStub: null);
-
   @override
   set lastName(String? value) =>
       super.noSuchMethod(Invocation.setter(#lastName, value), returnValueForMissingStub: null);
-
   @override
   set userData(_i5.UserData? user) =>
       super.noSuchMethod(Invocation.setter(#userData, user), returnValueForMissingStub: null);
-
   @override
   set accessToken(dynamic value) =>
       super.noSuchMethod(Invocation.setter(#accessToken, value), returnValueForMissingStub: null);
-
   @override
   set refreshToken(dynamic value) =>
       super.noSuchMethod(Invocation.setter(#refreshToken, value), returnValueForMissingStub: null);
-
   @override
   set tokenExpiryDate(int? value) =>
       super.noSuchMethod(Invocation.setter(#tokenExpiryDate, value), returnValueForMissingStub: null);
-
   @override
   set refreshExpiryDate(int? value) =>
       super.noSuchMethod(Invocation.setter(#refreshExpiryDate, value), returnValueForMissingStub: null);
@@ -84,7 +78,6 @@ class MockSettings extends _i1.Mock implements _i4.Settings {
   @override
   bool get isRefreshTokenExpired =>
       (super.noSuchMethod(Invocation.getter(#isRefreshTokenExpired), returnValue: false) as bool);
-
   @override
   set authResponseData(_i6.AuthData? auth) =>
       super.noSuchMethod(Invocation.setter(#authResponseData, auth), returnValueForMissingStub: null);
@@ -100,21 +93,17 @@ class MockAuthApi extends _i1.Mock implements _i7.AuthApi {
 
   @override
   String get bearerToken => (super.noSuchMethod(Invocation.getter(#bearerToken), returnValue: '') as String);
-
   @override
   _i8.Future<_i2.Response> login(String? userName, String? password) =>
       (super.noSuchMethod(Invocation.method(#login, [userName, password]),
           returnValue: Future<_i2.Response>.value(_FakeResponse_0())) as _i8.Future<_i2.Response>);
-
   @override
   _i8.Future<_i2.Response> refresh(String? refreshToken) =>
       (super.noSuchMethod(Invocation.method(#refresh, [refreshToken]),
           returnValue: Future<_i2.Response>.value(_FakeResponse_0())) as _i8.Future<_i2.Response>);
-
   @override
   void init(_i4.Settings? settings, _i9.EventBus? eventBus) =>
       super.noSuchMethod(Invocation.method(#init, [settings, eventBus]), returnValueForMissingStub: null);
-
   @override
   _i8.Future<_i2.Response> get(
           {String? url,
@@ -131,7 +120,6 @@ class MockAuthApi extends _i1.Mock implements _i7.AuthApi {
             #shouldRefresh: shouldRefresh
           }),
           returnValue: Future<_i2.Response>.value(_FakeResponse_0())) as _i8.Future<_i2.Response>);
-
   @override
   _i8.Future<_i2.Response> post(
           {String? url,
@@ -170,7 +158,6 @@ class MockUserApi extends _i1.Mock implements _i11.UserApi {
   @override
   void init(_i4.Settings? settings, _i9.EventBus? eventBus) =>
       super.noSuchMethod(Invocation.method(#init, [settings, eventBus]), returnValueForMissingStub: null);
-
   @override
   _i8.Future<_i2.Response> get(
           {String? url,
@@ -187,7 +174,6 @@ class MockUserApi extends _i1.Mock implements _i11.UserApi {
             #shouldRefresh: shouldRefresh
           }),
           returnValue: Future<_i2.Response>.value(_FakeResponse_0())) as _i8.Future<_i2.Response>);
-
   @override
   _i8.Future<_i2.Response> post(
           {String? url,
@@ -226,7 +212,6 @@ class MockSkiLiftApi extends _i1.Mock implements _i12.SkiLiftApi {
   @override
   void init(_i4.Settings? settings, _i9.EventBus? eventBus) =>
       super.noSuchMethod(Invocation.method(#init, [settings, eventBus]), returnValueForMissingStub: null);
-
   @override
   _i8.Future<_i2.Response> get(
           {String? url,
@@ -243,7 +228,6 @@ class MockSkiLiftApi extends _i1.Mock implements _i12.SkiLiftApi {
             #shouldRefresh: shouldRefresh
           }),
           returnValue: Future<_i2.Response>.value(_FakeResponse_0())) as _i8.Future<_i2.Response>);
-
   @override
   _i8.Future<_i2.Response> post(
           {String? url,

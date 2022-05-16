@@ -32,7 +32,7 @@ void main() {
   });
 
   group('login', () {
-    test('should return successful when email, password are correct and internet connection is acquired', () async {
+    test('should return successful when username, password are correct and internet connection is acquired', () async {
       final authResponse = AuthResponse.fromJson(jsonDecode("""{
               "access_token": "accessToken",
               "refresh_token": "refreshToken"
@@ -81,7 +81,7 @@ void main() {
     });
   });
 
-  group('get user data from form', () {
+  group('get user data', () {
     test('should return user data from settings', () async {
       const userData = UserData(username: "", email: "", firstName: "", lastName: "");
       when(_settings.userData).thenReturn(userData);

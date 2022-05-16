@@ -23,7 +23,7 @@ void main() {
     clearInteractions(_userRepository);
   });
 
-  group('login user from form', () {
+  group('login user', () {
     test('should return LoginFailedByInternet when there is no internet connection', () async {
       when(_userRepository.login(any, any)).thenAnswer((_) async => ErrorResult.noInternet());
 
