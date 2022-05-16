@@ -33,5 +33,6 @@
   "loadingFail": "Ups! Coś poszło nie tak. Spróbuj ponownie za chwilę!",
   "skiRunLength": "Długość trasy: ",
   "startDate": "Data rozpoczęcia: ",
-  "expireDate": "Data wygaśnięcia: "
+  "expireDate": "Data wygaśnięcia: ",
+  "numberOfEntries": "Ilość wejść: "
 }

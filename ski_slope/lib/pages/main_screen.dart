@@ -1,7 +1,9 @@
+import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:flutter/material.dart';
 import 'package:ski_slope/pages/profile/profile_screen.dart';
 import 'package:ski_slope/pages/ski_lifts/ski_lifts_screen.dart';
 import 'package:ski_slope/pages/vouchers/vouchers_screen.dart';
+import 'package:ski_slope/settings/settings.dart';
 import 'package:ski_slope/utilities/extensions.dart';
 import 'package:ski_slope/utilities/navigation.dart';
 import 'package:ski_slope/widgets/ski_app_bar.dart';
@@ -16,17 +18,20 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   int _currentPage = 0;
+  final Settings _settings = BlocProvider.getDependency();
 
   @override
   Widget build(BuildContext context) {
+    printError("Token ${_settings.accessToken}");
     return Scaffold(
       appBar: SkiAppBar(
         title: context.text.appName,
         isProfileVisible: true,
-        onTap: () => navigateToPage(
-          context,
-          builder: (context) => ProfileScreen(),
-        ),
+        onTap: () =>
+            navigateToPage(
+              context,
+              builder: (context) => ProfileScreen(),
+            ),
       ),
       body: _currentPage == 0 ? SkiLiftsScreen() : const VouchersScreen(),
       bottomNavigationBar: TicketBottomNavBar(

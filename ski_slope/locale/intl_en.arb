@@ -67,5 +67,7 @@
   "startDate": "Start date: ",
   "@startDate": {},
   "expireDate": "Expire date: ",
-  "@expireDate": {}
+  "@expireDate": {},
+  "numberOfEntries": "Number of entries: ",
+  "@numberOfEntries": {}
 }

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:ski_slope/base/bloc_listener.dart';
 import 'package:ski_slope/pages/ski_lifts/ski_lifts_bloc.dart';
 import 'package:ski_slope/pages/ski_lifts/ski_lifts_item.dart';
-import 'package:ski_slope/pages/tickets_screen.dart';
+import 'package:ski_slope/pages/tickets/tickets_screen.dart';
 import 'package:ski_slope/resources/dimensions.dart';
 import 'package:ski_slope/utilities/extensions.dart';
 import 'package:ski_slope/utilities/navigation.dart';

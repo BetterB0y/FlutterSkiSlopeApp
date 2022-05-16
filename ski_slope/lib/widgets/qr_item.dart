@@ -8,24 +8,37 @@ import 'package:ski_slope/utilities/date_extensions.dart';
 import 'package:ski_slope/utilities/extensions.dart';
 
 class QrItem extends StatelessWidget {
-  const QrItem({
+  const QrItem.voucher({
     Key? key,
     required this.ownerName,
     required this.qrCode,
     required this.startDate,
     required this.expireDate,
     required this.isActive,
-  }) : super(key: key);
+  })  : numberOfEntries = null,
+        super(key: key);
+
+  const QrItem.ticket({
+    Key? key,
+    required this.ownerName,
+    required this.qrCode,
+    required this.isActive,
+    required this.numberOfEntries,
+  })  : startDate = null,
+        expireDate = null,
+        super(key: key);
 
   final String qrCode;
   final String ownerName;
   final DateTime? startDate;
   final DateTime? expireDate;
+  final int? numberOfEntries;
   final bool isActive;
 
   @override
   Widget build(BuildContext context) {
     List<Widget> startAndExpireDates = [];
+    List<Widget> textNumberOfEntries = [];
     if (startDate != null && expireDate != null) {
       startAndExpireDates = [
         Text(
@@ -58,6 +71,26 @@ class QrItem extends StatelessWidget {
         ),
       ];
     }
+
+    if (numberOfEntries != null) {
+      textNumberOfEntries = [
+        Text(
+          context.text.numberOfEntries,
+          style: SkiTextStyle.headline3,
+          textAlign: TextAlign.center,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+        ),
+        Text(
+          numberOfEntries.toString(),
+          style: SkiTextStyle.bodyText2,
+          textAlign: TextAlign.center,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+        ),
+      ];
+    }
+
     return FractionallySizedBox(
       widthFactor: MediaQuery.of(context).size.height * 0.00105,
       child: Material(
@@ -83,6 +116,7 @@ class QrItem extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
               ),
               ...startAndExpireDates,
+              ...textNumberOfEntries,
             ],
           ),
         ),
