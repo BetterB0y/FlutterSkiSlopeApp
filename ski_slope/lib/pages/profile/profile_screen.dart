@@ -12,7 +12,7 @@ import 'package:ski_slope/widgets/ski_app_bar.dart';
 import 'package:ski_slope/widgets/ski_button.dart';
 
 class ProfileScreen extends StatefulWidget {
-  ProfileScreen({Key? key}) : super(key: key);
+  const ProfileScreen({Key? key}) : super(key: key);
 
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();

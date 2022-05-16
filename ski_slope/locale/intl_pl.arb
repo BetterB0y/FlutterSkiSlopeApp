@@ -34,5 +34,9 @@
   "skiRunLength": "Długość trasy: ",
   "startDate": "Data rozpoczęcia: ",
   "expireDate": "Data wygaśnięcia: ",
-  "numberOfEntries": "Ilość wejść: "
+  "numberOfEntries": "Ilość wejść: ",
+  "emptyHere": "Trochę tu pusto!",
+  "emptyVouchersSubtitle": "Nie masz żadnych karnetów",
+  "emptySkiLiftsSubtitle": "Aktualnie nie ma dostępnych żadnych wyciągów",
+  "emptyTicketsSubtitle": "Nie masz żadnych biletów na ten wyciąg"
 }

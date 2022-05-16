@@ -69,5 +69,13 @@
   "expireDate": "Expire date: ",
   "@expireDate": {},
   "numberOfEntries": "Number of entries: ",
-  "@numberOfEntries": {}
+  "@numberOfEntries": {},
+  "emptyHere": "Oh no. Its empty here!",
+  "@emptyHere": {},
+  "emptyVouchersSubtitle": "You don't have any vouchers",
+  "@emptyVouchersSubtitle": {},
+  "emptySkiLiftsSubtitle": "There is no ski lifts available at the moment",
+  "@emptySkiLiftsSubtitle": {},
+  "emptyTicketsSubtitle": "You don't have any tickets to this ski lift",
+  "@emptyTicketsSubtitle": {}
 }

@@ -25,4 +25,6 @@ class Dimensions {
   static const double profileIconSize = 80.0;
   static const double refreshHeaderHeight = 150.0;
   static const double refreshHeaderMargin = 55.0;
+  static const double emptyPageHorizontalPadding = 50.0;
+  static const double emptyPageVerticalPadding = 170.0;
 }

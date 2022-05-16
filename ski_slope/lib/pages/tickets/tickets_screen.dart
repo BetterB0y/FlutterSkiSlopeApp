@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:ski_slope/utilities/extensions.dart';
+import 'package:ski_slope/widgets/empty_page.dart';
 import 'package:ski_slope/widgets/qr_item.dart';
 import 'package:ski_slope/widgets/qr_screen.dart';
 import 'package:ski_slope/widgets/ski_app_bar.dart';
@@ -49,9 +51,14 @@ class _TicketScreenState extends State<TicketScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: SkiAppBar(title: widget.title),
-      body: QrScreen.tickets(
-        listOfQrs: listOfItems,
-      ),
+      body: listOfItems.isEmpty
+          ? EmptyPage(
+              title: context.text.emptyHere,
+              subtitle: context.text.emptyTicketsSubtitle,
+            )
+          : QrScreen.tickets(
+              listOfQrs: listOfItems,
+            ),
     );
   }
 }
