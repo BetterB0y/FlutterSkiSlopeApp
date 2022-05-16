@@ -4,60 +4,89 @@ import 'package:ski_slope/resources/colors.dart';
 import 'package:ski_slope/resources/dimensions.dart';
 import 'package:ski_slope/resources/ski_radius.dart';
 import 'package:ski_slope/resources/themes.dart';
+import 'package:ski_slope/utilities/date_extensions.dart';
+import 'package:ski_slope/utilities/extensions.dart';
 
 class QrItem extends StatelessWidget {
-  const QrItem({Key? key, required this.qrLink, required this.title, required this.description}) : super(key: key);
-  final String qrLink;
-  final String title;
-  final String description;
+  const QrItem({
+    Key? key,
+    required this.ownerName,
+    required this.qrCode,
+    required this.startDate,
+    required this.expireDate,
+    required this.isActive,
+  }) : super(key: key);
+
+  final String qrCode;
+  final String ownerName;
+  final DateTime? startDate;
+  final DateTime? expireDate;
+  final bool isActive;
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      color: SkiColors.additionalColor,
+    List<Widget> startAndExpireDates = [];
+    if (startDate != null && expireDate != null) {
+      startAndExpireDates = [
+        Text(
+          context.text.startDate,
+          style: SkiTextStyle.headline3,
+          textAlign: TextAlign.center,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+        ),
+        Text(
+          startDate!.asFullDateText,
+          style: SkiTextStyle.bodyText2,
+          textAlign: TextAlign.center,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+        ),
+        Text(
+          context.text.expireDate,
+          style: SkiTextStyle.headline3,
+          textAlign: TextAlign.center,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+        ),
+        Text(
+          expireDate!.asFullDateText,
+          style: SkiTextStyle.bodyText2,
+          textAlign: TextAlign.center,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+        ),
+      ];
+    }
+    return FractionallySizedBox(
+      widthFactor: MediaQuery.of(context).size.height * 0.00105,
+      child: Material(
+        color: isActive ? SkiColors.additionalColor : SkiColors.disabledColor,
         shape: SkiRadius.roundedRectangleBorder,
-        child: FractionallySizedBox(
-          widthFactor: MediaQuery.of(context).size.height * 0.00105,
-          child: Padding(
-            padding: const EdgeInsets.all(Dimensions.paddingMedium),
-            child: Column(
-              children: [
-                QrImage(
-                  data: qrLink,
-                  version: QrVersions.auto,
-                ),
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: Dimensions.paddingBig),
-                  child: Divider(),
-                ),
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                vertical: Dimensions.paddingSmall,
-                horizontal: Dimensions.paddingBig,
+        child: Padding(
+          padding: const EdgeInsets.all(Dimensions.paddingMedium),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              QrImage(
+                data: qrCode,
+                version: QrVersions.auto,
               ),
-              child: Text(
-                title,
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: Dimensions.paddingBig),
+                child: Divider(),
+              ),
+              Text(
+                ownerName,
                 style: SkiTextStyle.headline1,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                vertical: Dimensions.paddingSmall,
-                horizontal: Dimensions.paddingBig,
-              ),
-              child: Text(
-                    description,
-                    style: SkiTextStyle.bodyText1,
-                    textAlign: TextAlign.justify,
-                    maxLines: 4,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                ),
-              ],
-            ),
+              ...startAndExpireDates,
+            ],
           ),
-        ));
+        ),
+      ),
+    );
   }
 }

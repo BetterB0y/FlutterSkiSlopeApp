@@ -5,8 +5,10 @@ import 'package:ski_slope/data/api/auth_api.dart';
 import 'package:ski_slope/data/api/ski_lift_api.dart';
 import 'package:ski_slope/data/api/usecase/refresh.dart';
 import 'package:ski_slope/data/api/user_api.dart';
+import 'package:ski_slope/data/api/voucher_api.dart';
 import 'package:ski_slope/data/repository/ski_lift_repository.dart';
 import 'package:ski_slope/data/repository/user_repository.dart';
+import 'package:ski_slope/data/repository/voucher_repository.dart';
 import 'package:ski_slope/pages/login/login_bloc.dart';
 import 'package:ski_slope/pages/login/usecase/login_usecase.dart';
 import 'package:ski_slope/pages/profile/profile_bloc.dart';
@@ -14,6 +16,8 @@ import 'package:ski_slope/pages/profile/usecase/logout.dart';
 import 'package:ski_slope/pages/profile/usecase/user_data.dart';
 import 'package:ski_slope/pages/ski_lifts/ski_lifts_bloc.dart';
 import 'package:ski_slope/pages/ski_lifts/usecase/load_ski_lifts.dart';
+import 'package:ski_slope/pages/vouchers/usecase/load_vouchers.dart';
+import 'package:ski_slope/pages/vouchers/vouchers_bloc.dart';
 
 final repositories = [
   Dependency(
@@ -25,6 +29,11 @@ final repositories = [
   ),
   Dependency(
     (inject) => SkiLiftRepository(
+      inject.getDependency(),
+    ),
+  ),
+  Dependency(
+    (inject) => VoucherRepository(
       inject.getDependency(),
     ),
   ),
@@ -45,6 +54,12 @@ final apis = [
   ),
   Dependency(
     (inject) => SkiLiftApi(
+      inject.getDependency(),
+      inject.getDependency(),
+    ),
+  ),
+  Dependency(
+    (inject) => VoucherApi(
       inject.getDependency(),
       inject.getDependency(),
     ),
@@ -87,6 +102,11 @@ final usecases = [
       inject.getDependency(),
     ),
   ),
+  Dependency<LoadVouchersUseCase>(
+    (inject) => LoadVouchersImpl(
+      inject.getDependency(),
+    ),
+  ),
 ];
 
 List<Bloc> get blocs => [
@@ -108,6 +128,11 @@ List<Bloc> get blocs => [
       ),
       Bloc(
         (inject) => SkiLiftsBloc(
+          inject.getDependency(),
+        ),
+      ),
+      Bloc(
+        (inject) => VouchersBloc(
           inject.getDependency(),
         ),
       )

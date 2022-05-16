@@ -8,4 +8,5 @@ class SkiColors {
   static const additionalColor = Color(0xffedf7fe);
   static const buttonsColor = Color(0xff007cbb);
   static const errorColor = Colors.red;
+  static const disabledColor = Colors.black26;
 }

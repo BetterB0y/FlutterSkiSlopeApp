@@ -22,7 +22,7 @@ class SkiLiftsScreen extends StatelessWidget {
     return BlocListener<SkiLiftsBloc>(
       onChanged: (state) {
         if (state is ErrorState) {
-          SnackBarViewer().showSnackBar(context, context.text.loadingSkiLiftsFail);
+          SnackBarViewer().showSnackBar(context, context.text.loadingFail);
         }
       },
       builder: (context) => Consumer<SkiLiftsBloc>(

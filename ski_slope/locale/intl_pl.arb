@@ -30,6 +30,8 @@
   "incorrectLoginData": "Niepoprawne dane logowania",
   "noInternetConnection": "Brak internetu",
   "loginServerFail": "Usługa chwilowo niedostępna, spróbuj ponownie za chwilę",
-  "loadingSkiLiftsFail": "Ups! Coś poszło nie tak. Spróbuj ponownie za chwilę!",
-  "skiRunLength": "Długość trasy: "
+  "loadingFail": "Ups! Coś poszło nie tak. Spróbuj ponownie za chwilę!",
+  "skiRunLength": "Długość trasy: ",
+  "startDate": "Data rozpoczęcia: ",
+  "expireDate": "Data wygaśnięcia: "
 }

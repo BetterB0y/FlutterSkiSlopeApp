@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ski_slope/pages/profile/profile_screen.dart';
-import 'package:ski_slope/pages/qr_screen.dart';
 import 'package:ski_slope/pages/ski_lifts/ski_lifts_screen.dart';
+import 'package:ski_slope/pages/vouchers/vouchers_screen.dart';
 import 'package:ski_slope/utilities/extensions.dart';
 import 'package:ski_slope/utilities/navigation.dart';
 import 'package:ski_slope/widgets/ski_app_bar.dart';
@@ -28,7 +28,7 @@ class _MainScreenState extends State<MainScreen> {
           builder: (context) => ProfileScreen(),
         ),
       ),
-      body: _currentPage == 0 ? SkiLiftsScreen() : const QrScreen(),
+      body: _currentPage == 0 ? SkiLiftsScreen() : const VouchersScreen(),
       bottomNavigationBar: TicketBottomNavBar(
         currentIndex: _currentPage,
         onTap: (index) => setState(() => _currentPage = index),

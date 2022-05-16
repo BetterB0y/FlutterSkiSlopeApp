@@ -60,8 +60,12 @@
   "@noInternetConnection": {},
   "loginServerFail": "Service temporarily unavailable, please try again in a moment",
   "@loginServerFail": {},
-  "loadingSkiLiftsFail": "Ups! Something went wrong. Try again later!",
-  "@loadingSkiLiftsFail": {},
+  "loadingFail": "Ups! Something went wrong. Try again later!",
+  "@loadingFail": {},
   "skiRunLength": "Ski slope length: ",
-  "@skiRunLength": {}
+  "@skiRunLength": {},
+  "startDate": "Start date: ",
+  "@startDate": {},
+  "expireDate": "Expire date: ",
+  "@expireDate": {}
 }

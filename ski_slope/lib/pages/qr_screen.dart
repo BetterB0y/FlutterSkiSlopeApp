@@ -15,31 +15,40 @@ class _QrScreenState extends State<QrScreen> {
   int _qrIndex = 0;
 
   final listOfItems = [
-    const QrItem(
-      qrLink: "https://www.google.com",
-      title: "Test1",
-      description:
-          "Ośrodek narciarski położony w Wiśle Jaworniku na tyłach czterogwiazdkowego hotelu „Stok”, w Beskidzie Śląskim",
+    QrItem(
+      qrCode: "https://www.google.com",
+      ownerName: "Test1",
+      startDate: DateTime.now(),
+      expireDate: DateTime.now(),
+      isActive: true,
     ),
-    const QrItem(
-      qrLink: "https://www.google.com",
-      title: "Test2",
-      description: "test2",
+    QrItem(
+      qrCode: "https://www.google.com",
+      ownerName: "Test2",
+      startDate: DateTime.now(),
+      expireDate: DateTime.now(),
+      isActive: true,
     ),
-    const QrItem(
-      qrLink: "https://www.google.com",
-      title: "Test3",
-      description: "test3",
+    QrItem(
+      qrCode: "https://www.google.com",
+      ownerName: "Test3",
+      startDate: DateTime.now(),
+      expireDate: DateTime.now(),
+      isActive: false,
     ),
-    const QrItem(
-      qrLink: "https://www.google.com",
-      title: "Test4",
-      description: "test4",
+    QrItem(
+      qrCode: "https://www.google.com",
+      ownerName: "Test4",
+      startDate: DateTime.now(),
+      expireDate: DateTime.now(),
+      isActive: true,
     ),
-    const QrItem(
-      qrLink: "https://www.google.com",
-      title: "Test5",
-      description: "test5",
+    QrItem(
+      qrCode: "https://www.google.com",
+      ownerName: "Test5",
+      startDate: DateTime.now(),
+      expireDate: DateTime.now(),
+      isActive: true,
     ),
   ].toList();
 

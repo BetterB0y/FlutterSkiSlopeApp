@@ -5,6 +5,7 @@ class Dimensions {
 
   static const Size appBarSize = Size.fromHeight(Dimensions.appBarHeight);
   static const double appBarHeight = 56.0;
+  static const double paddingTiny = 2.0;
   static const double paddingSmall = 4.0;
   static const double paddingMedium = 8.0;
   static const double paddingMediumPlus = 12.0;
