@@ -24,6 +24,7 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
+    printError(DateTime.now());
     return Scaffold(
       appBar: SkiAppBar(
         title: context.text.appName,

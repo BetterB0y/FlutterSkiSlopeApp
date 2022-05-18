@@ -10,13 +10,19 @@ import 'package:ski_slope/data/api/auth_api.dart' as _i7;
 import 'package:ski_slope/data/api/mixin_api.dart' as _i10;
 import 'package:ski_slope/data/api/model/response.dart' as _i2;
 import 'package:ski_slope/data/api/ski_lift_api.dart' as _i12;
+import 'package:ski_slope/data/api/ticket_api.dart' as _i14;
 import 'package:ski_slope/data/api/user_api.dart' as _i11;
+import 'package:ski_slope/data/api/voucher_api.dart' as _i13;
 import 'package:ski_slope/data/model/auth_data.dart' as _i6;
 import 'package:ski_slope/data/model/result/result.dart' as _i3;
-import 'package:ski_slope/data/model/ski_lift_data.dart' as _i15;
+import 'package:ski_slope/data/model/ski_lift_data.dart' as _i17;
+import 'package:ski_slope/data/model/ticket_data.dart' as _i21;
 import 'package:ski_slope/data/model/user_data.dart' as _i5;
-import 'package:ski_slope/data/repository/ski_lift_repository.dart' as _i14;
-import 'package:ski_slope/data/repository/user_repository.dart' as _i13;
+import 'package:ski_slope/data/model/voucher_data.dart' as _i19;
+import 'package:ski_slope/data/repository/ski_lift_repository.dart' as _i16;
+import 'package:ski_slope/data/repository/ticket_repository.dart' as _i20;
+import 'package:ski_slope/data/repository/user_repository.dart' as _i15;
+import 'package:ski_slope/data/repository/voucher_repository.dart' as _i18;
 import 'package:ski_slope/settings/settings.dart' as _i4;
 
 // ignore_for_file: type=lint
@@ -212,6 +218,119 @@ class MockSkiLiftApi extends _i1.Mock implements _i12.SkiLiftApi {
   @override
   void init(_i4.Settings? settings, _i9.EventBus? eventBus) =>
       super.noSuchMethod(Invocation.method(#init, [settings, eventBus]), returnValueForMissingStub: null);
+
+  @override
+  _i8.Future<_i2.Response> get(
+          {String? url,
+          _i10.ResponseMapper? mapper,
+          bool? shouldAuthorize = true,
+          Map<String, String>? headers,
+          bool? shouldRefresh = true}) =>
+      (super.noSuchMethod(
+          Invocation.method(#get, [], {
+            #url: url,
+            #mapper: mapper,
+            #shouldAuthorize: shouldAuthorize,
+            #headers: headers,
+            #shouldRefresh: shouldRefresh
+          }),
+          returnValue: Future<_i2.Response>.value(_FakeResponse_0())) as _i8.Future<_i2.Response>);
+
+  @override
+  _i8.Future<_i2.Response> post(
+          {String? url,
+          _i10.ResponseMapper? mapper,
+          bool? shouldAuthorize = true,
+          Map<String, String>? headers,
+          dynamic body,
+          bool? shouldRefresh = true}) =>
+      (super.noSuchMethod(
+          Invocation.method(#post, [], {
+            #url: url,
+            #mapper: mapper,
+            #shouldAuthorize: shouldAuthorize,
+            #headers: headers,
+            #body: body,
+            #shouldRefresh: shouldRefresh
+          }),
+          returnValue: Future<_i2.Response>.value(_FakeResponse_0())) as _i8.Future<_i2.Response>);
+}
+
+/// A class which mocks [VoucherApi].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockVoucherApi extends _i1.Mock implements _i13.VoucherApi {
+  MockVoucherApi() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  String get bearerToken => (super.noSuchMethod(Invocation.getter(#bearerToken), returnValue: '') as String);
+
+  @override
+  _i8.Future<_i2.Response> getVouchers() => (super.noSuchMethod(Invocation.method(#getVouchers, []),
+      returnValue: Future<_i2.Response>.value(_FakeResponse_0())) as _i8.Future<_i2.Response>);
+
+  @override
+  void init(_i4.Settings? settings, _i9.EventBus? eventBus) =>
+      super.noSuchMethod(Invocation.method(#init, [settings, eventBus]), returnValueForMissingStub: null);
+
+  @override
+  _i8.Future<_i2.Response> get(
+          {String? url,
+          _i10.ResponseMapper? mapper,
+          bool? shouldAuthorize = true,
+          Map<String, String>? headers,
+          bool? shouldRefresh = true}) =>
+      (super.noSuchMethod(
+          Invocation.method(#get, [], {
+            #url: url,
+            #mapper: mapper,
+            #shouldAuthorize: shouldAuthorize,
+            #headers: headers,
+            #shouldRefresh: shouldRefresh
+          }),
+          returnValue: Future<_i2.Response>.value(_FakeResponse_0())) as _i8.Future<_i2.Response>);
+
+  @override
+  _i8.Future<_i2.Response> post(
+          {String? url,
+          _i10.ResponseMapper? mapper,
+          bool? shouldAuthorize = true,
+          Map<String, String>? headers,
+          dynamic body,
+          bool? shouldRefresh = true}) =>
+      (super.noSuchMethod(
+          Invocation.method(#post, [], {
+            #url: url,
+            #mapper: mapper,
+            #shouldAuthorize: shouldAuthorize,
+            #headers: headers,
+            #body: body,
+            #shouldRefresh: shouldRefresh
+          }),
+          returnValue: Future<_i2.Response>.value(_FakeResponse_0())) as _i8.Future<_i2.Response>);
+}
+
+/// A class which mocks [TicketApi].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockTicketApi extends _i1.Mock implements _i14.TicketApi {
+  MockTicketApi() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  String get bearerToken => (super.noSuchMethod(Invocation.getter(#bearerToken), returnValue: '') as String);
+
+  @override
+  _i8.Future<_i2.Response> getTicketById(int? id) => (super.noSuchMethod(Invocation.method(#getTicketById, [id]),
+      returnValue: Future<_i2.Response>.value(_FakeResponse_0())) as _i8.Future<_i2.Response>);
+
+  @override
+  void init(_i4.Settings? settings, _i9.EventBus? eventBus) =>
+      super.noSuchMethod(Invocation.method(#init, [settings, eventBus]), returnValueForMissingStub: null);
+
   @override
   _i8.Future<_i2.Response> get(
           {String? url,
@@ -251,7 +370,7 @@ class MockSkiLiftApi extends _i1.Mock implements _i12.SkiLiftApi {
 /// A class which mocks [UserRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockUserRepository extends _i1.Mock implements _i13.UserRepository {
+class MockUserRepository extends _i1.Mock implements _i15.UserRepository {
   MockUserRepository() {
     _i1.throwOnMissingStub(this);
   }
@@ -274,15 +393,46 @@ class MockUserRepository extends _i1.Mock implements _i13.UserRepository {
 /// A class which mocks [SkiLiftRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockSkiLiftRepository extends _i1.Mock implements _i14.SkiLiftRepository {
+class MockSkiLiftRepository extends _i1.Mock implements _i16.SkiLiftRepository {
   MockSkiLiftRepository() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i8.Future<_i3.DataResult<List<_i15.SkiLiftData>>> loadSkiLifts() =>
+  _i8.Future<_i3.DataResult<List<_i17.SkiLiftData>>> loadSkiLifts() =>
       (super.noSuchMethod(Invocation.method(#loadSkiLifts, []),
               returnValue:
-                  Future<_i3.DataResult<List<_i15.SkiLiftData>>>.value(_FakeDataResult_2<List<_i15.SkiLiftData>>()))
-          as _i8.Future<_i3.DataResult<List<_i15.SkiLiftData>>>);
+                  Future<_i3.DataResult<List<_i17.SkiLiftData>>>.value(_FakeDataResult_2<List<_i17.SkiLiftData>>()))
+          as _i8.Future<_i3.DataResult<List<_i17.SkiLiftData>>>);
+}
+
+/// A class which mocks [VoucherRepository].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockVoucherRepository extends _i1.Mock implements _i18.VoucherRepository {
+  MockVoucherRepository() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i8.Future<_i3.DataResult<List<_i19.VoucherData>>> loadVouchers() =>
+      (super.noSuchMethod(Invocation.method(#loadVouchers, []),
+              returnValue:
+                  Future<_i3.DataResult<List<_i19.VoucherData>>>.value(_FakeDataResult_2<List<_i19.VoucherData>>()))
+          as _i8.Future<_i3.DataResult<List<_i19.VoucherData>>>);
+}
+
+/// A class which mocks [TicketRepository].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockTicketRepository extends _i1.Mock implements _i20.TicketRepository {
+  MockTicketRepository() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i8.Future<_i3.DataResult<List<_i21.TicketData>>> loadTicketsById(int? id) => (super.noSuchMethod(
+          Invocation.method(#loadTicketsById, [id]),
+          returnValue: Future<_i3.DataResult<List<_i21.TicketData>>>.value(_FakeDataResult_2<List<_i21.TicketData>>()))
+      as _i8.Future<_i3.DataResult<List<_i21.TicketData>>>);
 }
