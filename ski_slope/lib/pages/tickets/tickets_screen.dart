@@ -1,64 +1,74 @@
+import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:flutter/material.dart';
+import 'package:ski_slope/base/bloc_listener.dart';
+import 'package:ski_slope/pages/tickets/tickets_bloc.dart';
 import 'package:ski_slope/utilities/extensions.dart';
+import 'package:ski_slope/utilities/snackbar_viewer.dart';
 import 'package:ski_slope/widgets/empty_page.dart';
 import 'package:ski_slope/widgets/qr_item.dart';
 import 'package:ski_slope/widgets/qr_screen.dart';
 import 'package:ski_slope/widgets/ski_app_bar.dart';
 
-class TicketScreen extends StatefulWidget {
-  const TicketScreen({Key? key, required this.title}) : super(key: key);
+class TicketScreen extends StatelessWidget {
+  TicketScreen({Key? key, required this.id, required this.title}) : super(key: key) {
+    BlocProvider.getBloc<TicketsBloc>().load(id);
+  }
+
+  final int id;
   final String title;
-
-  @override
-  State<TicketScreen> createState() => _TicketScreenState();
-}
-
-class _TicketScreenState extends State<TicketScreen> {
-  final listOfItems = [
-    const QrItem.ticket(
-      qrCode: "https://www.google.com",
-      ownerName: "Test1",
-      isActive: true,
-      numberOfEntries: 5,
-    ),
-    const QrItem.ticket(
-      qrCode: "https://www.google.com",
-      ownerName: "Test2",
-      isActive: false,
-      numberOfEntries: 5,
-    ),
-    const QrItem.ticket(
-      qrCode: "https://www.google.com",
-      ownerName: "Test3",
-      isActive: true,
-      numberOfEntries: 5,
-    ),
-    const QrItem.ticket(
-      qrCode: "https://www.google.com",
-      ownerName: "Test4",
-      isActive: true,
-      numberOfEntries: 5,
-    ),
-    const QrItem.ticket(
-      qrCode: "https://www.google.com",
-      ownerName: "Test5",
-      isActive: true,
-      numberOfEntries: 5,
-    ),
-  ].toList();
+  final SnackBarViewer _snackBarViewer = SnackBarViewer();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: SkiAppBar(title: widget.title),
-      body: listOfItems.isEmpty
-          ? EmptyPage(
-              title: context.text.emptyHere,
-              subtitle: context.text.emptyTicketsSubtitle,
-            )
-          : QrScreen.tickets(
-              listOfQrs: listOfItems,
-            ),
+      appBar: SkiAppBar(title: title),
+      body: BlocListener<TicketsBloc>(
+        onChanged: (state) {
+          if (state is NoInternetState) {
+            _snackBarViewer.showSnackBar(context, context.text.noInternetConnection);
+          } else if (state is ErrorState) {
+            _snackBarViewer.showSnackBar(context, "Inny błąd");
+          }
+        },
+        builder: (context) => Consumer<TicketsBloc>(
+          builder: (context, bloc) {
+            final state = bloc.state;
+            final tickets = state.tickets;
+
+            if (state is LoadingState) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+            if (state is ErrorState) {
+              printError("ErrorState");
+              return EmptyPage(
+                title: context.text.emptyHere,
+                subtitle: context.text.loadingFail,
+              );
+            }
+
+            if (tickets.isEmpty) {
+              printError("Empty");
+              return EmptyPage(
+                title: context.text.emptyHere,
+                subtitle: context.text.emptyVouchersSubtitle,
+              );
+            }
+
+            return QrScreen.tickets(
+              listOfQrs: tickets.mapToList(
+                (e) => QrItem.ticket(
+                  ownerName: e.ownerName,
+                  qrCode: e.code,
+                  isActive: e.isActive,
+                  entryAmount: e.entryAmount,
+                ),
+              ),
+            );
+          },
+        ),
+      ),
     );
   }
 }

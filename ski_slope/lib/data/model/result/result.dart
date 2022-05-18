@@ -4,14 +4,10 @@ typedef FutureResult = Future<Result>;
 
 typedef FutureDataResult<T> = Future<DataResult<T>>;
 
-/// Result of action
+/// Result
 abstract class Result extends Equatable {}
 
-class UnsuccessfulResult extends ErrorResult {
-  @override
-  List<Object?> get props => [];
-}
-
+/// Successful result of action
 class SuccessfulResult extends Result {
   SuccessfulResult();
 
@@ -23,6 +19,29 @@ class SuccessfulResult extends Result {
   List<Object?> get props => [];
 }
 
+/// Unsuccessful result of action
+abstract class ErrorResult extends Result {
+  ErrorResult();
+
+  factory ErrorResult.noInternet() => NoInternetConnectionResult._();
+}
+
+class UnsuccessfulResult extends ErrorResult {
+  UnsuccessfulResult() : super();
+
+  @override
+  List<Object?> get props => [];
+}
+
+class NoInternetConnectionResult extends ErrorResult {
+  NoInternetConnectionResult._() : super();
+
+  @override
+  List<Object?> get props => [];
+}
+
+//====================================================================================
+
 /// Result of action with data
 abstract class DataResult<T> extends Result {
   final T data;
@@ -30,19 +49,13 @@ abstract class DataResult<T> extends Result {
   DataResult._(this.data);
 }
 
+/// Successful result of action with data
 class SuccessfulDataResult<T> extends DataResult<T> {
   SuccessfulDataResult(T data) : super._(data);
 
   factory SuccessfulDataResult.online(T data) => OnlineSuccessfulDataResult._(data);
 
   factory SuccessfulDataResult.offline(T data) => OfflineSuccessfulDataResult._(data);
-
-  @override
-  List<Object?> get props => [data];
-}
-
-class UnsuccessfulDataResult<T> extends DataResult<T> {
-  UnsuccessfulDataResult(T data) : super._(data);
 
   @override
   List<Object?> get props => [data];
@@ -77,16 +90,24 @@ class OfflineSuccessfulDataResult<T> extends SuccessfulDataResult<T> implements 
   List<Object?> get props => [data];
 }
 
-///Errors
-abstract class ErrorResult extends Result {
-  ErrorResult();
-
-  factory ErrorResult.noInternet() => NoInternetConnectionResult._();
-}
-
-class NoInternetConnectionResult extends ErrorResult {
-  NoInternetConnectionResult._() : super();
+/// Unsuccessful result of action with data
+class ErrorDataResult<T> extends DataResult<T> {
+  ErrorDataResult(T data) : super._(data);
 
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [data];
+}
+
+class UnsuccessfulDataResult<T> extends ErrorDataResult<T> {
+  UnsuccessfulDataResult(T data) : super(data);
+
+  @override
+  List<Object?> get props => [data];
+}
+
+class NoInternetConnectionDataResult<T> extends ErrorDataResult<T> {
+  NoInternetConnectionDataResult(T data) : super(data);
+
+  @override
+  List<Object?> get props => [data];
 }

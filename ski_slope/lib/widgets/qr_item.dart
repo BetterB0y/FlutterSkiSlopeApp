@@ -15,7 +15,7 @@ class QrItem extends StatelessWidget {
     required this.startDate,
     required this.expireDate,
     required this.isActive,
-  })  : numberOfEntries = null,
+  })  : entryAmount = null,
         super(key: key);
 
   const QrItem.ticket({
@@ -23,7 +23,7 @@ class QrItem extends StatelessWidget {
     required this.ownerName,
     required this.qrCode,
     required this.isActive,
-    required this.numberOfEntries,
+    required this.entryAmount,
   })  : startDate = null,
         expireDate = null,
         super(key: key);
@@ -32,7 +32,7 @@ class QrItem extends StatelessWidget {
   final String ownerName;
   final DateTime? startDate;
   final DateTime? expireDate;
-  final int? numberOfEntries;
+  final int? entryAmount;
   final bool isActive;
 
   @override
@@ -72,7 +72,7 @@ class QrItem extends StatelessWidget {
       ];
     }
 
-    if (numberOfEntries != null) {
+    if (entryAmount != null) {
       textNumberOfEntries = [
         Text(
           context.text.numberOfEntries,
@@ -82,7 +82,7 @@ class QrItem extends StatelessWidget {
           overflow: TextOverflow.ellipsis,
         ),
         Text(
-          numberOfEntries.toString(),
+          entryAmount.toString(),
           style: SkiTextStyle.bodyText2,
           textAlign: TextAlign.center,
           maxLines: 1,

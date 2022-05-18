@@ -6,28 +6,17 @@ import 'package:ski_slope/widgets/empty_page.dart';
 import 'package:ski_slope/widgets/qr_item.dart';
 import 'package:ski_slope/widgets/qr_screen.dart';
 
-class VouchersScreen extends StatefulWidget {
-  const VouchersScreen({Key? key}) : super(key: key);
-
-  @override
-  State<VouchersScreen> createState() => _VouchersScreenState();
-}
-
-class _VouchersScreenState extends State<VouchersScreen> {
-  final VouchersBloc _bloc = BlocProvider.getBloc();
-
-  @override
-  void initState() {
-    super.initState();
-    _bloc.load();
+class VouchersScreen extends StatelessWidget {
+  VouchersScreen({Key? key}) : super(key: key) {
+    BlocProvider.getBloc<VouchersBloc>().load();
   }
 
   @override
   Widget build(BuildContext context) {
     return Consumer<VouchersBloc>(
       builder: (context, bloc) {
-        final state = _bloc.state;
-        final vouchers = bloc.state.vouchers;
+        final state = bloc.state;
+        final vouchers = state.vouchers;
 
         if (state is LoadingState) {
           return const Center(

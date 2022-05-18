@@ -1,3 +1,4 @@
+import 'package:ski_slope/data/api/model/response.dart';
 import 'package:ski_slope/data/api/model/ski_lift_response.dart';
 import 'package:ski_slope/data/api/ski_lift_api.dart';
 import 'package:ski_slope/data/model/result/result.dart';
@@ -14,6 +15,8 @@ class SkiLiftRepository {
     if (response is SkiLiftListResponse) {
       final skiLiftData = response.skiLifts.mapToList((element) => element.toSkiLiftData());
       return SuccessfulDataResult.online(skiLiftData);
+    } else if (response is NoInternetResponse) {
+      return NoInternetConnectionDataResult(const []);
     } else {
       return UnsuccessfulDataResult(const []);
     }
@@ -22,11 +25,11 @@ class SkiLiftRepository {
 
 extension SkiLiftConverter on SkiLiftResponse {
   SkiLiftData toSkiLiftData() => SkiLiftData(
-        id: id,
-        name: name,
-        maxHeight: maxHeight,
-        skiRunLength: skiRunLength,
-        description: description,
-        isActive: isActive,
-      );
+    id: id,
+    name: name,
+    maxHeight: maxHeight,
+    skiRunLength: skiRunLength,
+    description: description,
+    isActive: isActive,
+  );
 }
