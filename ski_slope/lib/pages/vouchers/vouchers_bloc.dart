@@ -5,19 +5,23 @@ import 'package:ski_slope/pages/vouchers/usecase/load_vouchers.dart';
 
 class VouchersBloc extends StatedBloc<VouchersState> {
   final LoadVouchersUseCase _loadVouchers;
+  List<VoucherData> _vouchers = [];
 
   VouchersBloc(this._loadVouchers);
 
   @override
-  VouchersState get defaultState => LoadingState();
+  VouchersState get defaultState => LoadingState([]);
 
   void load() async {
-    setState(LoadingState());
+    setState(LoadingState(_vouchers));
     var result = await _loadVouchers.execute();
     if (result is SuccessfulDataResult) {
-      setState(ReadyState(result.data));
+      _vouchers = result.data;
+      setState(ReadyState(_vouchers));
+    } else if (result is NoInternetConnectionDataResult) {
+      setState(NoInternetState(_vouchers));
     } else {
-      setState(ErrorState());
+      setState(ErrorState(_vouchers));
     }
   }
 }
@@ -29,7 +33,7 @@ abstract class VouchersState {
 }
 
 class LoadingState extends VouchersState {
-  LoadingState() : super([]);
+  LoadingState(List<VoucherData> vouchers) : super(vouchers);
 }
 
 class ReadyState extends VouchersState {
@@ -37,5 +41,9 @@ class ReadyState extends VouchersState {
 }
 
 class ErrorState extends VouchersState {
-  ErrorState() : super([]);
+  ErrorState(List<VoucherData> vouchers) : super(vouchers);
+}
+
+class NoInternetState extends VouchersState {
+  NoInternetState(List<VoucherData> vouchers) : super(vouchers);
 }

@@ -27,7 +27,7 @@ class TicketScreen extends StatelessWidget {
           if (state is NoInternetState) {
             _snackBarViewer.showSnackBar(context, context.text.noInternetConnection);
           } else if (state is ErrorState) {
-            _snackBarViewer.showSnackBar(context, "Inny błąd");
+            _snackBarViewer.showSnackBar(context, context.text.otherError);
           }
         },
         builder: (context) => Consumer<TicketsBloc>(
@@ -40,19 +40,11 @@ class TicketScreen extends StatelessWidget {
                 child: CircularProgressIndicator(),
               );
             }
-            if (state is ErrorState) {
-              printError("ErrorState");
-              return EmptyPage(
-                title: context.text.emptyHere,
-                subtitle: context.text.loadingFail,
-              );
-            }
 
             if (tickets.isEmpty) {
-              printError("Empty");
               return EmptyPage(
                 title: context.text.emptyHere,
-                subtitle: context.text.emptyVouchersSubtitle,
+                subtitle: context.text.emptyTicketsSubtitle,
               );
             }
 

@@ -35,6 +35,13 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     super.dispose();
   }
 
+  final _headlineTextStyle = const TextStyle(
+    fontWeight: FontWeight.w600,
+    color: SkiColors.buttonsColor,
+    fontSize: 28,
+    letterSpacing: 2,
+  );
+
   @override
   Widget build(BuildContext context) {
     final _descriptionTextStyle = Theme.of(context).textTheme.headline2!.copyWith(
@@ -42,12 +49,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           fontSize: 16,
           fontWeight: FontWeight.w400,
         );
-    const _headlineTextStyle = TextStyle(
-      fontWeight: FontWeight.w600,
-      color: SkiColors.buttonsColor,
-      fontSize: 28,
-      letterSpacing: 2,
-    );
+
     double screenHeight = MediaQuery.of(context).size.height;
 
     String headline = context.text.welcomeScreenHeadline1;

@@ -2,7 +2,6 @@ import 'package:ski_slope/base/stated_bloc.dart';
 import 'package:ski_slope/data/model/result/result.dart';
 import 'package:ski_slope/data/model/ticket_data.dart';
 import 'package:ski_slope/pages/tickets/usecase/load_tickets.dart';
-import 'package:ski_slope/utilities/extensions.dart';
 
 class TicketsBloc extends StatedBloc<TicketsState> {
   final LoadTicketsUseCase _loadTickets;
@@ -16,7 +15,6 @@ class TicketsBloc extends StatedBloc<TicketsState> {
   void load(int id) async {
     setState(LoadingState(_tickets));
     var result = await _loadTickets.execute(id);
-    printError(result);
     if (result is SuccessfulDataResult) {
       _tickets = result.data;
       setState(ReadyState(_tickets));

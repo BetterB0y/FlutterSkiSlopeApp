@@ -11,30 +11,21 @@ import 'package:ski_slope/utilities/extensions.dart';
 import 'package:ski_slope/widgets/ski_app_bar.dart';
 import 'package:ski_slope/widgets/ski_button.dart';
 
-class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({Key? key}) : super(key: key);
-
-  @override
-  State<ProfileScreen> createState() => _ProfileScreenState();
-}
-
-class _ProfileScreenState extends State<ProfileScreen> {
-  final ProfileBloc _bloc = BlocProvider.getBloc();
-  final Settings _settings = BlocProvider.getDependency();
-
-  @override
-  void initState() {
-    super.initState();
+class ProfileScreen extends StatelessWidget {
+  ProfileScreen({Key? key}) : super(key: key) {
     _bloc.getUserData();
   }
 
-  TextStyle headlineStyle = const TextStyle(
+  final ProfileBloc _bloc = BlocProvider.getBloc();
+  final Settings _settings = BlocProvider.getDependency();
+
+  final headlineStyle = const TextStyle(
     fontWeight: FontWeight.w600,
     color: SkiColors.buttonsColor,
     fontSize: 19,
   );
 
-  TextStyle valueStyle = const TextStyle(
+  final valueStyle = const TextStyle(
     fontWeight: FontWeight.w300,
     color: SkiColors.mainColor,
     fontSize: 16,

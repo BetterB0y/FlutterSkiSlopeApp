@@ -6,15 +6,9 @@ import 'package:ski_slope/utilities/extensions.dart';
 
 class SkiLiftsItem extends StatelessWidget {
   const SkiLiftsItem(
-      {Key? key,
-      required this.id,
-      required this.name,
-      required this.description,
-      required this.skiRunLength,
-      required this.onTap})
+      {Key? key, required this.name, required this.description, required this.skiRunLength, required this.onTap})
       : super(key: key);
   final String name;
-  final int id;
   final String? description;
   final double skiRunLength;
   final VoidCallback? onTap;
@@ -58,7 +52,7 @@ class SkiLiftsItem extends StatelessWidget {
                         bottom: Dimensions.paddingBigPlus,
                       ),
                       child: Text(
-                        id.toString(),
+                        name,
                         style: SkiTextStyle.headline1,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,

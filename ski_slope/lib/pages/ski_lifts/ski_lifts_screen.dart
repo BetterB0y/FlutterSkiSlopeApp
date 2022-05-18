@@ -26,7 +26,7 @@ class SkiLiftsScreen extends StatelessWidget {
         if (state is NoInternetState) {
           _snackBarViewer.showSnackBar(context, context.text.noInternetConnection);
         } else if (state is ErrorState) {
-          _snackBarViewer.showSnackBar(context, "Inny błąd");
+          _snackBarViewer.showSnackBar(context, context.text.otherError);
         }
       },
       builder: (context) => Consumer<SkiLiftsBloc>(
@@ -37,13 +37,6 @@ class SkiLiftsScreen extends StatelessWidget {
           if (state is LoadingState) {
             return const Center(
               child: CircularProgressIndicator(),
-            );
-          }
-
-          if (state is ErrorState) {
-            return EmptyPage(
-              title: context.text.emptyHere,
-              subtitle: context.text.loadingFail,
             );
           }
 
@@ -66,7 +59,6 @@ class SkiLiftsScreen extends StatelessWidget {
                 return Padding(
                   padding: const EdgeInsets.symmetric(horizontal: Dimensions.menuItemsPadding),
                   child: SkiLiftsItem(
-                    id: skiLift.id,
                     name: skiLift.name,
                     description: skiLift.description,
                     skiRunLength: skiLift.skiRunLength,
@@ -76,7 +68,7 @@ class SkiLiftsScreen extends StatelessWidget {
                         id: skiLift.id,
                         title: skiLift.name,
                       ),
-                    ),
+                    ).then((_) => bloc.load()),
                   ),
                 );
               },

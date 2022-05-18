@@ -1,7 +1,9 @@
 import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:flutter/material.dart';
+import 'package:ski_slope/base/bloc_listener.dart';
 import 'package:ski_slope/pages/vouchers/vouchers_bloc.dart';
 import 'package:ski_slope/utilities/extensions.dart';
+import 'package:ski_slope/utilities/snackbar_viewer.dart';
 import 'package:ski_slope/widgets/empty_page.dart';
 import 'package:ski_slope/widgets/qr_item.dart';
 import 'package:ski_slope/widgets/qr_screen.dart';
@@ -11,45 +13,50 @@ class VouchersScreen extends StatelessWidget {
     BlocProvider.getBloc<VouchersBloc>().load();
   }
 
+  final SnackBarViewer _snackBarViewer = SnackBarViewer();
+
   @override
   Widget build(BuildContext context) {
-    return Consumer<VouchersBloc>(
-      builder: (context, bloc) {
-        final state = bloc.state;
-        final vouchers = state.vouchers;
-
-        if (state is LoadingState) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
+    return BlocListener<VouchersBloc>(
+      onChanged: (state) {
+        if (state is NoInternetState) {
+          _snackBarViewer.showSnackBar(context, context.text.noInternetConnection);
+        } else if (state is ErrorState) {
+          _snackBarViewer.showSnackBar(context, context.text.otherError);
         }
-        if (state is ErrorState) {
-          return EmptyPage(
-            title: context.text.emptyHere,
-            subtitle: context.text.loadingFail,
-          );
-        }
-
-        if (vouchers.isEmpty) {
-          return EmptyPage(
-            title: context.text.emptyHere,
-            subtitle: context.text.emptyVouchersSubtitle,
-          );
-        }
-
-        return QrScreen.vouchers(
-          listOfVouchers: vouchers,
-          listOfQrs: vouchers.mapToList(
-            (e) => QrItem.voucher(
-              ownerName: e.ownerName,
-              qrCode: e.code,
-              startDate: e.startDate,
-              expireDate: e.expireDate,
-              isActive: e.isActive,
-            ),
-          ),
-        );
       },
+      builder: (context) => Consumer<VouchersBloc>(
+        builder: (context, bloc) {
+          final state = bloc.state;
+          final vouchers = state.vouchers;
+
+          if (state is LoadingState) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+
+          if (vouchers.isEmpty) {
+            return EmptyPage(
+              title: context.text.emptyHere,
+              subtitle: context.text.emptyVouchersSubtitle,
+            );
+          }
+
+          return QrScreen.vouchers(
+            listOfVouchers: vouchers,
+            listOfQrs: vouchers.mapToList(
+              (e) => QrItem.voucher(
+                ownerName: e.ownerName,
+                qrCode: e.code,
+                startDate: e.startDate,
+                expireDate: e.expireDate,
+                isActive: e.isActive,
+              ),
+            ),
+          );
+        },
+      ),
     );
   }
 }
