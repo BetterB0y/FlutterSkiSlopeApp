@@ -33,8 +33,8 @@ class SkiLiftsItem extends StatelessWidget {
                 ),
                 child: AspectRatio(
                   aspectRatio: 1.0,
-                  child: Image.network(
-                    "https://images.unsplash.com/photo-1453728013993-6d66e9c9123a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dmlld3xlbnwwfHwwfHw%3D&w=1000&q=80",
+                  child: Image.asset(
+                    "assets/ski_lifts/ski_lifts.jpeg",
                     fit: BoxFit.cover,
                   ),
                 ),
