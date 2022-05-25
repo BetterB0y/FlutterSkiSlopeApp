@@ -10,7 +10,11 @@ class SkiButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      style: style ?? ElevatedButton.styleFrom(primary: SkiColors.buttonsColor, onPrimary: SkiColors.additionalColor),
+      style: style ??
+          ElevatedButton.styleFrom(
+            primary: SkiColors.buttonsColor,
+            onPrimary: SkiColors.additionalColor,
+          ),
       onPressed: onPressed,
       child: child,
     );

@@ -26,7 +26,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
   final LoginBloc _bloc = BlocProvider.getBloc();
-  final SnackBarViewer _snackBarViewer = SnackBarViewer();
+  final _showSnackBar = SnackBarViewer().showSnackBar;
   bool _passwordVisible = false;
 
   @override
@@ -67,7 +67,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       cursorColor: SkiColors.mainColor,
                       validator: (value) =>
-                      value?.isUserNameValid ?? false ? null : context.text.loginUsernameIncorrect,
+                          value?.isUserNameValid ?? false ? null : context.text.loginUsernameIncorrect,
                       textInputAction: TextInputAction.next,
                     ),
                     const SizedBox(height: Dimensions.loginSpacer),
@@ -116,7 +116,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                           : 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) '
                                               'AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Mobile Safari/537.36',
                                       onPageFinished: (url) {
-                                        _bloc.loginWithGoogle(url);
+                                        if (url.contains(
+                                            "https://projekt-pp-tab-2022.herokuapp.com/api/auth/test/everyone")) {
+                                          _bloc.loginWithGoogle(url);
+                                        }
                                       },
                                       url:
                                           "https://projekt-pp-tab-2022.herokuapp.com/oauth2/authorize/google?redirect_uri=https://projekt-pp-tab-2022.herokuapp.com/api/auth/test/everyone",
@@ -176,18 +179,18 @@ class _LoginScreenState extends State<LoginScreen> {
         MaterialPageRoute(
           builder: (context) => const MainScreen(),
         ),
-            (_) => false);
+        (_) => false);
   }
 
   void onStateChanged(BuildContext context, LoginState state) {
     if (state is SuccessState) {
       _navigateToMainScreen(context);
     } else if (state is IncorrectDataState) {
-      _snackBarViewer.showSnackBar(context, context.text.incorrectLoginData);
+      _showSnackBar(context, context.text.incorrectLoginData);
     } else if (state is NoInternetState) {
-      _snackBarViewer.showSnackBar(context, context.text.noInternetConnection);
+      _showSnackBar(context, context.text.noInternetConnection);
     } else if (state is ServerFailState) {
-      _snackBarViewer.showSnackBar(context, context.text.loginServerFail);
+      _showSnackBar(context, context.text.loginServerFail);
     }
   }
 }

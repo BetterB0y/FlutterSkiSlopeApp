@@ -33,9 +33,15 @@ class _QrScreenState extends State<QrScreen> {
 
   final PageController _controller = PageController(initialPage: 0);
 
-  void _nextQr() => _controller.nextPage(duration: Durations.welcomePageImageChange, curve: Curves.ease);
+  void _nextQr() => _controller.nextPage(
+        duration: Durations.welcomePageImageChange,
+        curve: Curves.ease,
+      );
 
-  void _previousQr() => _controller.previousPage(duration: Durations.welcomePageImageChange, curve: Curves.ease);
+  void _previousQr() => _controller.previousPage(
+        duration: Durations.welcomePageImageChange,
+        curve: Curves.ease,
+      );
 
   @override
   Widget build(BuildContext context) {

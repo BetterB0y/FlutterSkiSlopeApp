@@ -49,6 +49,8 @@ class LoginBloc extends StatedBloc<LoginState> {
       debugPrint("GoogleAuth url: $url");
       setState(SuccessState());
       _username = _password = "";
+    } else {
+      setState(ServerFailState());
     }
   }
 }

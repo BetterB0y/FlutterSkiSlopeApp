@@ -26,29 +26,31 @@ class EmptyPage extends StatelessWidget {
             size: MediaQuery.of(context).size.height * 0.5,
           ),
         ),
-        Align(
+        Container(
           alignment: Alignment.topCenter,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: Dimensions.emptyPageHorizontalPadding,
-              vertical: Dimensions.emptyPageVerticalPadding,
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  title,
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.headline4?.copyWith(color: SkiColors.mainColor),
-                ),
-                Text(
-                  subtitle,
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.headline6?.copyWith(color: SkiColors.buttonsColor),
-                )
-              ],
-            ),
+          padding: const EdgeInsets.symmetric(
+            horizontal: Dimensions.emptyPageHorizontalPadding,
+            vertical: Dimensions.emptyPageVerticalPadding,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                title,
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.headline4?.copyWith(
+                      color: SkiColors.mainColor,
+                    ),
+              ),
+              Text(
+                subtitle,
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.headline6?.copyWith(
+                      color: SkiColors.buttonsColor,
+                    ),
+              ),
+            ],
           ),
         ),
       ],

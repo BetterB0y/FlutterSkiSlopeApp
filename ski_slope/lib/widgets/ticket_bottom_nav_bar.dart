@@ -18,8 +18,14 @@ class TicketBottomNavBar extends StatelessWidget {
       currentIndex: currentIndex,
       onTap: onTap,
       items: [
-        BottomNavigationBarItem(icon: const Icon(FontAwesomeIcons.ticketSimple), label: context.text.tickets),
-        BottomNavigationBarItem(icon: const Icon(FontAwesomeIcons.ticket), label: context.text.vouchers),
+        BottomNavigationBarItem(
+          icon: const Icon(FontAwesomeIcons.ticketSimple),
+          label: context.text.tickets,
+        ),
+        BottomNavigationBarItem(
+          icon: const Icon(FontAwesomeIcons.ticket),
+          label: context.text.vouchers,
+        ),
       ],
     );
   }

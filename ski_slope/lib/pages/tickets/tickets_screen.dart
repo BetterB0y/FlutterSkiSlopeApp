@@ -16,7 +16,7 @@ class TicketScreen extends StatelessWidget {
 
   final int id;
   final String title;
-  final SnackBarViewer _snackBarViewer = SnackBarViewer();
+  final _showSnackBar = SnackBarViewer().showSnackBar;
 
   @override
   Widget build(BuildContext context) {
@@ -25,9 +25,9 @@ class TicketScreen extends StatelessWidget {
       body: BlocListener<TicketsBloc>(
         onChanged: (state) {
           if (state is NoInternetState) {
-            _snackBarViewer.showSnackBar(context, context.text.noInternetConnection);
+            _showSnackBar(context, context.text.noInternetConnection);
           } else if (state is ErrorState) {
-            _snackBarViewer.showSnackBar(context, context.text.otherError);
+            _showSnackBar(context, context.text.otherError);
           }
         },
         builder: (context) => Consumer<TicketsBloc>(

@@ -25,9 +25,15 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   int _currentPage = 0;
   final PageController _controller = PageController(initialPage: 0);
 
-  void _nextPage() => _controller.nextPage(duration: Durations.welcomePageImageChange, curve: Curves.ease);
+  void _nextPage() => _controller.nextPage(
+        duration: Durations.welcomePageImageChange,
+        curve: Curves.ease,
+      );
 
-  void _previousPage() => _controller.previousPage(duration: Durations.welcomePageImageChange, curve: Curves.ease);
+  void _previousPage() => _controller.previousPage(
+        duration: Durations.welcomePageImageChange,
+        curve: Curves.ease,
+      );
 
   @override
   void dispose() {
