@@ -33,6 +33,13 @@ class UnsuccessfulResult extends ErrorResult {
   List<Object?> get props => [];
 }
 
+class UserExistsResult extends ErrorResult {
+  UserExistsResult() : super();
+
+  @override
+  List<Object?> get props => [];
+}
+
 class NoInternetConnectionResult extends ErrorResult {
   NoInternetConnectionResult._() : super();
 

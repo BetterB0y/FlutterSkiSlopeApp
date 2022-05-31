@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:ski_slope/data/api/model/auth_response.dart';
+import 'package:ski_slope/data/api/model/register_response.dart';
 import 'package:ski_slope/data/api/model/response.dart';
 import 'package:ski_slope/data/api/model/user_response.dart';
 import 'package:ski_slope/data/model/auth_data.dart';
@@ -78,6 +79,71 @@ void main() {
       verifyNoMoreInteractions(_authApi);
       verifyZeroInteractions(_settings);
       verifyZeroInteractions(_userApi);
+    });
+  });
+
+  group('register', () {
+    Map<String, dynamic> newUserData = {};
+    newUserData['username'] = "Daniel";
+    newUserData['password'] = "haslo";
+    newUserData['email'] = "test@gmail.com";
+    newUserData['firstName'] = "Daniel";
+    newUserData['lastName'] = "Pakosz";
+
+    test('when user is added correctly should return UserExistsResult', () async {
+      when(_userApi.registerUser(newUserData)).thenAnswer((_) async => RegisterResponse());
+
+      await expectLater(
+        _repository.register(newUserData),
+        completion(SuccessfulResult()),
+      );
+
+      verify(_userApi.registerUser(newUserData)).called(1);
+      verifyNoMoreInteractions(_userApi);
+      verifyZeroInteractions(_authApi);
+      verifyZeroInteractions(_settings);
+    });
+
+    test('when user already exists should return UserExistsResult', () async {
+      when(_userApi.registerUser(newUserData)).thenAnswer((_) async => UserExistsResponse());
+
+      await expectLater(
+        _repository.register(newUserData),
+        completion(UserExistsResult()),
+      );
+
+      verify(_userApi.registerUser(newUserData)).called(1);
+      verifyNoMoreInteractions(_userApi);
+      verifyZeroInteractions(_authApi);
+      verifyZeroInteractions(_settings);
+    });
+
+    test('when api fails because of internet should return NoInternetConnectionResult', () async {
+      when(_userApi.registerUser(newUserData)).thenAnswer((_) async => NoInternetResponse());
+
+      await expectLater(
+        _repository.register(newUserData),
+        completion(ErrorResult.noInternet()),
+      );
+
+      verify(_userApi.registerUser(newUserData)).called(1);
+      verifyNoMoreInteractions(_userApi);
+      verifyZeroInteractions(_authApi);
+      verifyZeroInteractions(_settings);
+    });
+
+    test('when api fails because of unknown error should return UnsuccessfulResult', () async {
+      when(_userApi.registerUser(newUserData)).thenAnswer((_) async => StatusCodeNotHandledResponse("url", 404));
+
+      await expectLater(
+        _repository.register(newUserData),
+        completion(UnsuccessfulResult()),
+      );
+
+      verify(_userApi.registerUser(newUserData)).called(1);
+      verifyNoMoreInteractions(_userApi);
+      verifyZeroInteractions(_authApi);
+      verifyZeroInteractions(_settings);
     });
   });
 

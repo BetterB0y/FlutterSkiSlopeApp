@@ -11,21 +11,21 @@ import 'package:ski_slope/data/repository/voucher_repository.dart';
 import '../mock.mocks.dart';
 
 void main() {
-  late MockVoucherApi api;
-  late VoucherRepository repository;
+  late MockVoucherApi _api;
+  late VoucherRepository _repository;
 
   setUpAll(() {
-    api = MockVoucherApi();
-    repository = VoucherRepository(api);
+    _api = MockVoucherApi();
+    _repository = VoucherRepository(_api);
   });
 
   setUp(() {
-    clearInteractions(api);
+    clearInteractions(_api);
   });
 
   group('load vouchers', () {
     test('when api succeeds should return SuccessfulDataResult with data', () async {
-      when(api.getVouchers()).thenAnswer((_) async => VoucherListResponse(jsonDecode("""[
+      when(_api.getVouchers()).thenAnswer((_) async => VoucherListResponse(jsonDecode("""[
     {
       "id": 13,
       "code": "code",
@@ -45,7 +45,7 @@ void main() {
       ]""")));
 
       await expectLater(
-        repository.loadVouchers(),
+        _repository.loadVouchers(),
         completion(
           SuccessfulDataResult.online([
             const VoucherData(
@@ -68,33 +68,33 @@ void main() {
         ),
       );
 
-      verify(api.getVouchers()).called(1);
-      verifyNoMoreInteractions(api);
+      verify(_api.getVouchers()).called(1);
+      verifyNoMoreInteractions(_api);
     });
 
     test('when api fails because of unknown reason should return NoInternetConnectionDataResult with empty list',
         () async {
-      when(api.getVouchers()).thenAnswer((_) async => StatusCodeNotHandledResponse("test", 502));
+          when(_api.getVouchers()).thenAnswer((_) async => StatusCodeNotHandledResponse("test", 502));
 
       await expectLater(
-        repository.loadVouchers(),
+        _repository.loadVouchers(),
         completion(UnsuccessfulDataResult(const <VoucherData>[])),
       );
 
-      verify(api.getVouchers()).called(1);
-      verifyNoMoreInteractions(api);
+      verify(_api.getVouchers()).called(1);
+      verifyNoMoreInteractions(_api);
     });
 
     test('when api fails because of internet should return NoInternetConnectionDataResult with empty list', () async {
-      when(api.getVouchers()).thenAnswer((_) async => NoInternetResponse());
+      when(_api.getVouchers()).thenAnswer((_) async => NoInternetResponse());
 
       await expectLater(
-        repository.loadVouchers(),
+        _repository.loadVouchers(),
         completion(NoInternetConnectionDataResult(const <VoucherData>[])),
       );
 
-      verify(api.getVouchers()).called(1);
-      verifyNoMoreInteractions(api);
+      verify(_api.getVouchers()).called(1);
+      verifyNoMoreInteractions(_api);
     });
   });
 }

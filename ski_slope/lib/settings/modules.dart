@@ -16,6 +16,8 @@ import 'package:ski_slope/pages/login/usecase/login_usecase.dart';
 import 'package:ski_slope/pages/profile/profile_bloc.dart';
 import 'package:ski_slope/pages/profile/usecase/logout.dart';
 import 'package:ski_slope/pages/profile/usecase/user_data.dart';
+import 'package:ski_slope/pages/register/register_bloc.dart';
+import 'package:ski_slope/pages/register/usecase/register.dart';
 import 'package:ski_slope/pages/ski_lifts/ski_lifts_bloc.dart';
 import 'package:ski_slope/pages/ski_lifts/usecase/load_ski_lifts.dart';
 import 'package:ski_slope/pages/tickets/tickets_bloc.dart';
@@ -127,6 +129,11 @@ final usecases = [
       inject.getDependency(),
     ),
   ),
+  Dependency<RegisterUseCase>(
+    (inject) => RegisterImpl(
+      inject.getDependency(),
+    ),
+  ),
 ];
 
 List<Bloc> get blocs => [
@@ -158,6 +165,11 @@ List<Bloc> get blocs => [
       ),
       Bloc(
         (inject) => TicketsBloc(
+          inject.getDependency(),
+        ),
+      ),
+      Bloc(
+        (inject) => RegisterBloc(
           inject.getDependency(),
         ),
       ),

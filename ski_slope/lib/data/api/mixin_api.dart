@@ -100,6 +100,8 @@ mixin Api {
     if (statusCode == 401) {
       _eventBus!.fire(LogOutEvent());
       return UnauthorizedResponse();
+    } else if (statusCode == 400) {
+      return UserExistsResponse();
     } else if (statusCode >= 200 && statusCode < 300) {
       return null;
     }

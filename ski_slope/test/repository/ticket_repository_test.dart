@@ -11,21 +11,21 @@ import 'package:ski_slope/data/repository/ticket_repository.dart';
 import '../mock.mocks.dart';
 
 void main() {
-  late MockTicketApi api;
-  late TicketRepository repository;
+  late MockTicketApi _api;
+  late TicketRepository _repository;
 
   setUpAll(() {
-    api = MockTicketApi();
-    repository = TicketRepository(api);
+    _api = MockTicketApi();
+    _repository = TicketRepository(_api);
   });
 
   setUp(() {
-    clearInteractions(api);
+    clearInteractions(_api);
   });
 
   group('load tickets', () {
     test('when api succeeds should return SuccessfulDataResult with data', () async {
-      when(api.getTicketById(any)).thenAnswer((_) async => TicketListResponse(jsonDecode("""[
+      when(_api.getTicketById(any)).thenAnswer((_) async => TicketListResponse(jsonDecode("""[
     {
       "id": 15,
       "code": "code",
@@ -45,7 +45,7 @@ void main() {
       ]""")));
 
       await expectLater(
-        repository.loadTicketsById(1),
+        _repository.loadTicketsById(1),
         completion(
           SuccessfulDataResult.online(const [
             TicketData(
@@ -65,33 +65,33 @@ void main() {
         ),
       );
 
-      verify(api.getTicketById(any)).called(1);
-      verifyNoMoreInteractions(api);
+      verify(_api.getTicketById(any)).called(1);
+      verifyNoMoreInteractions(_api);
     });
 
     test('when api fails because of unknown reason should return NoInternetConnectionDataResult with empty list',
         () async {
-      when(api.getTicketById(any)).thenAnswer((_) async => StatusCodeNotHandledResponse("test", 502));
+          when(_api.getTicketById(any)).thenAnswer((_) async => StatusCodeNotHandledResponse("test", 502));
 
       await expectLater(
-        repository.loadTicketsById(1),
+        _repository.loadTicketsById(1),
         completion(UnsuccessfulDataResult(const <TicketData>[])),
       );
 
-      verify(api.getTicketById(any)).called(1);
-      verifyNoMoreInteractions(api);
+      verify(_api.getTicketById(any)).called(1);
+      verifyNoMoreInteractions(_api);
     });
 
     test('when api fails because of internet should return NoInternetConnectionDataResult with empty list', () async {
-      when(api.getTicketById(any)).thenAnswer((_) async => NoInternetResponse());
+      when(_api.getTicketById(any)).thenAnswer((_) async => NoInternetResponse());
 
       await expectLater(
-        repository.loadTicketsById(1),
+        _repository.loadTicketsById(1),
         completion(NoInternetConnectionDataResult(const <TicketData>[])),
       );
 
-      verify(api.getTicketById(any)).called(1);
-      verifyNoMoreInteractions(api);
+      verify(_api.getTicketById(any)).called(1);
+      verifyNoMoreInteractions(_api);
     });
   });
 }

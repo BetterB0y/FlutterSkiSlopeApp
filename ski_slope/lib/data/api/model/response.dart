@@ -20,3 +20,5 @@ class StatusCodeNotHandledResponse extends ErrorResponse {
 class NoInternetResponse extends ErrorResponse {}
 
 class UnauthorizedResponse extends ErrorResponse {}
+
+class UserExistsResponse extends ErrorResponse {}

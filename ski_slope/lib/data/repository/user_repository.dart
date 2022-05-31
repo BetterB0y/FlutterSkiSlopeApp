@@ -1,5 +1,6 @@
 import 'package:ski_slope/data/api/auth_api.dart';
 import 'package:ski_slope/data/api/model/auth_response.dart';
+import 'package:ski_slope/data/api/model/register_response.dart';
 import 'package:ski_slope/data/api/model/response.dart';
 import 'package:ski_slope/data/api/model/user_response.dart';
 import 'package:ski_slope/data/api/user_api.dart';
@@ -43,6 +44,18 @@ class UserRepository {
     if (accessToken != null && refreshToken != null) {
       _settings.authResponseData = AuthData(accessToken, refreshToken);
       return SuccessfulResult();
+    }
+    return UnsuccessfulResult();
+  }
+
+  FutureResult register(Map<String, dynamic> newUserData) async {
+    final response = await _userApi.registerUser(newUserData);
+    if (response is RegisterResponse) {
+      return SuccessfulResult();
+    } else if (response is UserExistsResponse) {
+      return UserExistsResult();
+    } else if (response is NoInternetResponse) {
+      return ErrorResult.noInternet();
     }
     return UnsuccessfulResult();
   }

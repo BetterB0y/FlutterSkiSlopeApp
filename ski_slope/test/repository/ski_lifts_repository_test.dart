@@ -11,21 +11,21 @@ import 'package:ski_slope/data/repository/ski_lift_repository.dart';
 import '../mock.mocks.dart';
 
 void main() {
-  late MockSkiLiftApi api;
-  late SkiLiftRepository repository;
+  late MockSkiLiftApi _api;
+  late SkiLiftRepository _repository;
 
   setUpAll(() {
-    api = MockSkiLiftApi();
-    repository = SkiLiftRepository(api);
+    _api = MockSkiLiftApi();
+    _repository = SkiLiftRepository(_api);
   });
 
   setUp(() {
-    clearInteractions(api);
+    clearInteractions(_api);
   });
 
   group('load ski lifts', () {
     test('when api succeeds should return SuccessfulDataResult with data', () async {
-      when(api.getSkiLifts()).thenAnswer((_) async => SkiLiftListResponse(jsonDecode("""[
+      when(_api.getSkiLifts()).thenAnswer((_) async => SkiLiftListResponse(jsonDecode("""[
     {
       "id": 1,
       "name": "Tommy Beginner",
@@ -53,7 +53,7 @@ void main() {
       ]""")));
 
       await expectLater(
-        repository.loadSkiLifts(),
+        _repository.loadSkiLifts(),
         completion(
           SuccessfulDataResult.online(const [
             SkiLiftData(
@@ -84,33 +84,33 @@ void main() {
         ),
       );
 
-      verify(api.getSkiLifts()).called(1);
-      verifyNoMoreInteractions(api);
+      verify(_api.getSkiLifts()).called(1);
+      verifyNoMoreInteractions(_api);
     });
 
     test('when api fails because of unknown reason should return NoInternetConnectionDataResult with empty list',
         () async {
-      when(api.getSkiLifts()).thenAnswer((_) async => StatusCodeNotHandledResponse("test", 502));
+          when(_api.getSkiLifts()).thenAnswer((_) async => StatusCodeNotHandledResponse("test", 502));
 
       await expectLater(
-        repository.loadSkiLifts(),
+        _repository.loadSkiLifts(),
         completion(UnsuccessfulDataResult(const <SkiLiftData>[])),
       );
 
-      verify(api.getSkiLifts()).called(1);
-      verifyNoMoreInteractions(api);
+      verify(_api.getSkiLifts()).called(1);
+      verifyNoMoreInteractions(_api);
     });
 
     test('when api fails because of internet should return NoInternetConnectionDataResult with empty list', () async {
-      when(api.getSkiLifts()).thenAnswer((_) async => NoInternetResponse());
+      when(_api.getSkiLifts()).thenAnswer((_) async => NoInternetResponse());
 
       await expectLater(
-        repository.loadSkiLifts(),
+        _repository.loadSkiLifts(),
         completion(NoInternetConnectionDataResult(const <SkiLiftData>[])),
       );
 
-      verify(api.getSkiLifts()).called(1);
-      verifyNoMoreInteractions(api);
+      verify(_api.getSkiLifts()).called(1);
+      verifyNoMoreInteractions(_api);
     });
   });
 }

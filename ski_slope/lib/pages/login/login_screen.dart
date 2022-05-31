@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:ski_slope/base/bloc_listener.dart';
 import 'package:ski_slope/pages/login/login_bloc.dart';
 import 'package:ski_slope/pages/main_screen.dart';
+import 'package:ski_slope/pages/register/register_screen.dart';
 import 'package:ski_slope/resources/colors.dart';
 import 'package:ski_slope/resources/dimensions.dart';
 import 'package:ski_slope/utilities/extensions.dart';
@@ -27,13 +28,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
   final LoginBloc _bloc = BlocProvider.getBloc();
   final _showSnackBar = SnackBarViewer().showSnackBar;
-  bool _passwordVisible = false;
-
-  @override
-  void initState() {
-    super.initState();
-    _passwordVisible = false;
-  }
+  bool _passwordInvisible = true;
 
   @override
   Widget build(BuildContext context) {
@@ -70,26 +65,27 @@ class _LoginScreenState extends State<LoginScreen> {
                           value?.isUserNameValid ?? false ? null : context.text.loginUsernameIncorrect,
                       textInputAction: TextInputAction.next,
                     ),
-                    const SizedBox(height: Dimensions.loginSpacer),
+                    const SizedBox(height: Dimensions.formSpacer),
                     TextFormField(
                       onChanged: (text) => _bloc.password = text,
-                      obscureText: !_passwordVisible,
+                      obscureText: _passwordInvisible,
                       enableSuggestions: false,
                       autocorrect: false,
                       decoration: inputDecoration.copyWith(
                         labelText: context.text.password,
                         suffixIcon: IconButton(
-                          icon: Icon(_passwordVisible ? Icons.visibility : Icons.visibility_off),
+                          icon: Icon(_passwordInvisible ? Icons.visibility_off : Icons.visibility),
                           color: SkiColors.mainColor,
-                          onPressed: () => setState(() => _passwordVisible = !_passwordVisible),
+                          onPressed: () => setState(() => _passwordInvisible = !_passwordInvisible),
                         ),
                       ),
                       cursorColor: SkiColors.mainColor,
-                      validator: (value) => value?.isPasswordValid ?? false ? null : context.text.loginPasswordTooShort,
+                      validator: (value) =>
+                          value?.isPasswordValid ?? false ? null : context.text.loginPasswordTooShortTooLong,
                       textInputAction: TextInputAction.done,
                       onEditingComplete: _validateAndLogin,
                     ),
-                    const SizedBox(height: Dimensions.loginSpacer),
+                    const SizedBox(height: Dimensions.formSpacer),
                     Consumer<LoginBloc>(
                       builder: (context, bloc) => ConditionalBuilder(
                         condition: (_bloc.state is! LoadingState),
@@ -100,7 +96,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               onPressed: _validateAndLogin,
                               child: Text(context.text.login),
                             ),
-                            const SizedBox(height: Dimensions.loginSpacer / 3),
+                            const SizedBox(height: Dimensions.formSpacer / 3),
                             SkiButton(
                               onPressed: () async {
                                 bool isConnected = await _bloc.isConnected();
@@ -132,21 +128,18 @@ class _LoginScreenState extends State<LoginScreen> {
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   Image.asset("assets/login_screen/googleLogo.png", scale: 21),
-                                  const SizedBox(width: Dimensions.loginSpacer / 3),
+                                  const SizedBox(width: Dimensions.formSpacer / 3),
                                   Text(context.text.loginWithGoogle),
                                 ],
                               ),
                             ),
-                            const Divider(height: Dimensions.loginSpacer / 3),
+                            const Divider(height: Dimensions.formSpacer / 3),
                             SkiButton(
                               style: ElevatedButton.styleFrom(
                                   primary: SkiColors.additionalColor, onPrimary: SkiColors.mainColor),
                               onPressed: () => navigateToPage(
                                 context,
-                                builder: (context) => const SkiWebPage(
-                                  //TODO change url to register site
-                                  url: "https://www.google.com",
-                                ),
+                                builder: (context) => const RegisterScreen(),
                               ),
                               child: Text(context.text.register),
                             ),

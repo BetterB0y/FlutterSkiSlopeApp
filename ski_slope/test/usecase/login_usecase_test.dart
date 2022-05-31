@@ -7,12 +7,12 @@ import 'package:ski_slope/pages/login/usecase/login_usecase.dart';
 import '../mock.mocks.dart';
 
 void main() {
-  late LoginUseCase useCase;
+  late LoginUseCase _useCase;
   final _settings = MockSettings();
   final _userRepository = MockUserRepository();
 
   setUpAll(() {
-    useCase = LoginImpl(
+    _useCase = LoginImpl(
       _settings,
       _userRepository,
     );
@@ -28,7 +28,7 @@ void main() {
       when(_userRepository.login(any, any)).thenAnswer((_) async => ErrorResult.noInternet());
 
       await expectLater(
-        useCase.login("username", "password"),
+        _useCase.login("username", "password"),
         completion(LoginFailedByInternet()),
       );
 
@@ -47,7 +47,7 @@ void main() {
           )));
 
       await expectLater(
-        useCase.login("username", "password"),
+        _useCase.login("username", "password"),
         completion(LoginSuccess()),
       );
 
@@ -62,7 +62,7 @@ void main() {
       when(_userRepository.login(any, any)).thenAnswer((_) async => UnsuccessfulResult());
 
       await expectLater(
-        useCase.login("username", "password"),
+        _useCase.login("username", "password"),
         completion(LoginFailed()),
       );
 
