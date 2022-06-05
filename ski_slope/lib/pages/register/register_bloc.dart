@@ -3,7 +3,7 @@ import 'package:ski_slope/data/model/result/result.dart';
 import 'package:ski_slope/pages/register/usecase/register.dart';
 
 class RegisterBloc extends StatedBloc<RegisterState> {
-  final RegisterUseCase _register;
+  final RegisterUseCase _registerUseCase;
 
   String _firstName = "";
   String _lastName = "";
@@ -24,21 +24,21 @@ class RegisterBloc extends StatedBloc<RegisterState> {
 
   set password(String password) => _password = password.trim();
 
-  RegisterBloc(this._register);
+  RegisterBloc(this._registerUseCase);
 
   @override
   RegisterState get defaultState => InitState();
 
-  bool validatePasswords() {
+  void validatePasswordAndRegister() {
     if (_password != _repeatedPassword) {
       setState(InvalidPasswordState());
-      return false;
+      return;
     }
-    return true;
+    _register();
   }
 
-  Future<void> register() async {
-    var result = await _register.execute(newUserDataToJson());
+  Future<void> _register() async {
+    var result = await _registerUseCase.execute(newUserDataToJson());
     if (result is SuccessfulResult) {
       setState(SuccessState());
     } else if (result is UserExistsResult) {

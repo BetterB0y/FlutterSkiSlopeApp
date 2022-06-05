@@ -93,5 +93,7 @@
   "passwordNotIdentical": "Passwords are not the same",
   "@passwordNotIdentical": {},
   "userAlreadyExists": "User with this username already exists. Please choose another username.",
-  "@userAlreadyExists": {}
+  "@userAlreadyExists": {},
+  "registered": "Registered",
+  "@registered": {}
 }

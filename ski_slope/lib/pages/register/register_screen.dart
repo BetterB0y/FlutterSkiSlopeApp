@@ -30,7 +30,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Widget build(BuildContext context) {
     const inputDecoration = InputDecoration(
       border: OutlineInputBorder(
-        borderSide: BorderSide(color: SkiColors.mainColor, width: 2.0),
+        borderSide: BorderSide(
+          color: SkiColors.mainColor,
+          width: Dimensions.inputDecorationWidth,
+        ),
       ),
     );
 
@@ -151,15 +154,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
   void _validateAndRegister() {
     if (_formKey.currentState!.validate()) {
       FocusManager.instance.primaryFocus?.unfocus();
-      if (_bloc.validatePasswords()) {
-        _bloc.register();
-      }
+      _bloc.validatePasswordAndRegister();
     }
   }
 
   void _onStateChanged(BuildContext context, RegisterState state) {
     if (state is SuccessState) {
       navigateBack(context);
+      _showSnackBar(context, context.text.registered);
     } else if (state is InvalidPasswordState) {
       _showSnackBar(context, context.text.passwordNotIdentical);
     } else if (state is UserExistsState) {

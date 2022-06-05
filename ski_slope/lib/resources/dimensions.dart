@@ -21,6 +21,7 @@ class Dimensions {
   static const double welcomePageButtonPadding = 150;
   static const double welcomePageCorner = 20.0;
   static const double formSpacer = 30.0;
+  static const double inputDecorationWidth = 2.0;
   static const double profileIconPadding = 12.0;
   static const double profileIconSize = 80.0;
   static const double refreshHeaderHeight = 150.0;
