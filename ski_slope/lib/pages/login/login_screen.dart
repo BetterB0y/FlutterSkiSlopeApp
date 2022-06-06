@@ -29,6 +29,8 @@ class _LoginScreenState extends State<LoginScreen> {
   final LoginBloc _bloc = BlocProvider.getBloc();
   final _showSnackBar = SnackBarViewer().showSnackBar;
   bool _passwordInvisible = true;
+  final googleSignUrl = "https://projekt-pp-tab-2022.herokuapp.com/oauth2/authorize/google?redirect_uri=";
+  final redirectUrl = "https://projekt-pp-tab-2022-frontend.herokuapp.com/blank";
 
   @override
   Widget build(BuildContext context) {
@@ -112,13 +114,11 @@ class _LoginScreenState extends State<LoginScreen> {
                                           : 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) '
                                               'AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Mobile Safari/537.36',
                                       onPageFinished: (url) {
-                                        if (url.contains(
-                                            "https://projekt-pp-tab-2022.herokuapp.com/api/auth/test/everyone")) {
+                                        if (url.contains(redirectUrl)) {
                                           _bloc.loginWithGoogle(url);
                                         }
                                       },
-                                      url:
-                                          "https://projekt-pp-tab-2022.herokuapp.com/oauth2/authorize/google?redirect_uri=https://projekt-pp-tab-2022.herokuapp.com/api/auth/test/everyone",
+                                      url: googleSignUrl + redirectUrl,
                                     ),
                                   );
                                 }
