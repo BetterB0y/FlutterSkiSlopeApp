@@ -39,12 +39,16 @@ void main() {
 
     test('should clear user data and return LoginSuccess when logging in', () async {
       when(_userRepository.login(any, any)).thenAnswer((_) async => SuccessfulResult());
-      when(_userRepository.getUserData()).thenAnswer((_) async => SuccessfulDataResult.online(const UserData(
+      when(_userRepository.getUserData()).thenAnswer(
+        (_) async => SuccessfulDataResult.online(
+          const UserData(
             username: "username",
             email: "test.email@gmail.com",
             firstName: "firstName",
             lastName: "lastName",
-          )));
+          ),
+        ),
+      );
 
       await expectLater(
         _useCase.login("username", "password"),

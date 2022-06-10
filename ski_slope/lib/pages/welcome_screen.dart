@@ -149,9 +149,11 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                               child: FractionallySizedBox(
                                 widthFactor: 0.6,
                                 child: SkiButton(
-                                  child: Text(_currentPage == _welcomeImages.length - 1
-                                      ? context.text.login
-                                      : context.text.welcomeNext),
+                                  child: Text(
+                                    _currentPage == _welcomeImages.length - 1
+                                        ? context.text.login
+                                        : context.text.welcomeNext,
+                                  ),
                                   onPressed: _currentPage == _welcomeImages.length - 1
                                       ? () => navigateToPage(
                                             context,

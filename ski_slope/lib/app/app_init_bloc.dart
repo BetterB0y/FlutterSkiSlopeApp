@@ -12,16 +12,18 @@ class AppInitBloc extends StatedBloc<AppInitState> {
     setState(InitializingState());
     try {
       final preinit = await _getRequiringPreInit();
-      setState(ReadyState(
-        blocs: modules.blocs,
-        dependencies: [
-          Dependency<Settings>((_) => preinit.settings),
-          ...modules.apis,
-          ...modules.repositories,
-          ...modules.usecases,
-          ...modules.services,
-        ],
-      ));
+      setState(
+        ReadyState(
+          blocs: modules.blocs,
+          dependencies: [
+            Dependency<Settings>((_) => preinit.settings),
+            ...modules.apis,
+            ...modules.repositories,
+            ...modules.usecases,
+            ...modules.services,
+          ],
+        ),
+      );
     } catch (e) {
       setState(ErrorState(e));
     }

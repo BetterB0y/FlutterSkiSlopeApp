@@ -23,9 +23,11 @@ class RefreshTokenImpl extends RefreshTokenUseCase {
   FutureResult execute() async {
     try {
       debugPrint(
-          "RefreshTokenImpl:execute - rt: ${DateTime.fromMillisecondsSinceEpoch(_settings.refreshExpiryDate ?? 0)}, ${_settings.isRefreshTokenExpired}");
+        "RefreshTokenImpl:execute - rt: ${DateTime.fromMillisecondsSinceEpoch(_settings.refreshExpiryDate ?? 0)}, ${_settings.isRefreshTokenExpired}",
+      );
       debugPrint(
-          "RefreshTokenImpl:execute - at: ${DateTime.fromMillisecondsSinceEpoch(_settings.tokenExpiryDate ?? 0)}, ${_settings.isTokenExpired}");
+        "RefreshTokenImpl:execute - at: ${DateTime.fromMillisecondsSinceEpoch(_settings.tokenExpiryDate ?? 0)}, ${_settings.isTokenExpired}",
+      );
       if (_settings.refreshToken == null) {
         return UnsuccessfulResult();
       } else {

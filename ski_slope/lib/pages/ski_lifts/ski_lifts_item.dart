@@ -5,9 +5,13 @@ import 'package:ski_slope/resources/themes.dart';
 import 'package:ski_slope/utilities/extensions.dart';
 
 class SkiLiftsItem extends StatelessWidget {
-  const SkiLiftsItem(
-      {Key? key, required this.name, required this.description, required this.skiRunLength, required this.onTap})
-      : super(key: key);
+  const SkiLiftsItem({
+    Key? key,
+    required this.name,
+    required this.description,
+    required this.skiRunLength,
+    required this.onTap,
+  }) : super(key: key);
   final String name;
   final String? description;
   final double skiRunLength;

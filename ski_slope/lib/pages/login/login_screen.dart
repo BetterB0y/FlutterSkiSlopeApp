@@ -136,7 +136,9 @@ class _LoginScreenState extends State<LoginScreen> {
                             const Divider(height: Dimensions.formSpacer / 3),
                             SkiButton(
                               style: ElevatedButton.styleFrom(
-                                  primary: SkiColors.additionalColor, onPrimary: SkiColors.mainColor),
+                                primary: SkiColors.additionalColor,
+                                onPrimary: SkiColors.mainColor,
+                              ),
                               onPressed: () => navigateToPage(
                                 context,
                                 builder: (context) => const RegisterScreen(),
@@ -169,10 +171,11 @@ class _LoginScreenState extends State<LoginScreen> {
 
   void _navigateToMainScreen(BuildContext context) {
     Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(
-          builder: (context) => const MainScreen(),
-        ),
-        (_) => false);
+      MaterialPageRoute(
+        builder: (context) => const MainScreen(),
+      ),
+      (_) => false,
+    );
   }
 
   void onStateChanged(BuildContext context, LoginState state) {

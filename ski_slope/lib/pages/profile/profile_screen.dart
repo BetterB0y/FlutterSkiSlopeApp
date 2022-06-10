@@ -99,9 +99,10 @@ class ProfileScreen extends StatelessWidget {
 
   void _navigateToWelcomeScreen(BuildContext context) {
     Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(
-          builder: (context) => const WelcomeScreen(),
-        ),
-        (_) => false);
+      MaterialPageRoute(
+        builder: (context) => const WelcomeScreen(),
+      ),
+      (_) => false,
+    );
   }
 }

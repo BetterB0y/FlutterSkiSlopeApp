@@ -25,7 +25,10 @@ void main() {
 
   group('load tickets', () {
     test('when api succeeds should return SuccessfulDataResult with data', () async {
-      when(_api.getTicketById(any)).thenAnswer((_) async => TicketListResponse(jsonDecode("""[
+      when(_api.getTicketById(any)).thenAnswer(
+        (_) async => TicketListResponse(
+          jsonDecode(
+            """[
     {
       "id": 15,
       "code": "code",
@@ -42,7 +45,10 @@ void main() {
       "entryAmount": 2,
       "skiLiftName": "Tommy Beginner"
     }
-      ]""")));
+      ]""",
+          ),
+        ),
+      );
 
       await expectLater(
         _repository.loadTicketsById(1),
@@ -56,11 +62,12 @@ void main() {
               entryAmount: 5,
             ),
             TicketData(
-                id: 16,
-                code: "1f3139ea-e570-49d7-8aaa-b724d171745b",
-                ownerName: "Magda may",
-                isActive: false,
-                entryAmount: 2),
+              id: 16,
+              code: "1f3139ea-e570-49d7-8aaa-b724d171745b",
+              ownerName: "Magda may",
+              isActive: false,
+              entryAmount: 2,
+            ),
           ]),
         ),
       );

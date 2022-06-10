@@ -66,12 +66,15 @@ mixin Api {
   }
 
   Future<Response> _performRequest(Future<http.Response> request, ResponseMapper mapper, String url) {
-    return request.then((response) {
-      final result = _handleStatusCodeFromResponse(response);
-      final data = utf8.decode(response.bodyBytes);
-      _printRequest(response, data);
-      return result ?? mapper(data);
-    }, onError: (e, st) => _handleErrors(e, st, url));
+    return request.then(
+      (response) {
+        final result = _handleStatusCodeFromResponse(response);
+        final data = utf8.decode(response.bodyBytes);
+        _printRequest(response, data);
+        return result ?? mapper(data);
+      },
+      onError: (e, st) => _handleErrors(e, st, url),
+    );
   }
 
   Future<http.Response> _obtainRequest(

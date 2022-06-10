@@ -25,7 +25,10 @@ void main() {
 
   group('load vouchers', () {
     test('when api succeeds should return SuccessfulDataResult with data', () async {
-      when(_api.getVouchers()).thenAnswer((_) async => VoucherListResponse(jsonDecode("""[
+      when(_api.getVouchers()).thenAnswer(
+        (_) async => VoucherListResponse(
+          jsonDecode(
+            """[
     {
       "id": 13,
       "code": "code",
@@ -42,7 +45,10 @@ void main() {
       "startDate": "2022-05-18 21:05:28.663723",
       "expireDate": "2022-05-18 21:30:28.663723"
     }
-      ]""")));
+      ]""",
+          ),
+        ),
+      );
 
       await expectLater(
         _repository.loadVouchers(),

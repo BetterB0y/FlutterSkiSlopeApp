@@ -25,7 +25,10 @@ void main() {
 
   group('load ski lifts', () {
     test('when api succeeds should return SuccessfulDataResult with data', () async {
-      when(_api.getSkiLifts()).thenAnswer((_) async => SkiLiftListResponse(jsonDecode("""[
+      when(_api.getSkiLifts()).thenAnswer(
+        (_) async => SkiLiftListResponse(
+          jsonDecode(
+            """[
     {
       "id": 1,
       "name": "Tommy Beginner",
@@ -50,7 +53,10 @@ void main() {
       "description": "skiLift 3 description",
       "active": true
     }
-      ]""")));
+      ]""",
+          ),
+        ),
+      );
 
       await expectLater(
         _repository.loadSkiLifts(),

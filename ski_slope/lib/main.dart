@@ -55,13 +55,14 @@ class _SkiSlopeAppState extends State<SkiSlopeApp> {
                 debugShowCheckedModeBanner: false,
                 onGenerateTitle: (BuildContext context) => context.text.appName,
                 theme: ThemeData(
-                    primarySwatch: Colors.blue,
-                    scaffoldBackgroundColor: SkiColors.backgroundColor,
-                    errorColor: SkiColors.errorColor,
-                    colorScheme: ThemeData().colorScheme.copyWith(
-                          primary: SkiColors.mainColor,
-                          background: SkiColors.backgroundColor,
-                        )),
+                  primarySwatch: Colors.blue,
+                  scaffoldBackgroundColor: SkiColors.backgroundColor,
+                  errorColor: SkiColors.errorColor,
+                  colorScheme: ThemeData().colorScheme.copyWith(
+                        primary: SkiColors.mainColor,
+                        background: SkiColors.backgroundColor,
+                      ),
+                ),
                 localizationsDelegates: AppLocalizations.localizationsDelegates,
                 supportedLocales: AppLocalizations.supportedLocales,
                 home: _AppPage(),

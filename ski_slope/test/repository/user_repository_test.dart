@@ -34,10 +34,14 @@ void main() {
 
   group('login', () {
     test('should return successful when username, password are correct and internet connection is acquired', () async {
-      final authResponse = AuthResponse.fromJson(jsonDecode("""{
+      final authResponse = AuthResponse.fromJson(
+        jsonDecode(
+          """{
               "access_token": "accessToken",
               "refresh_token": "refreshToken"
-              }"""));
+              }""",
+        ),
+      );
       when(_authApi.login(any, any)).thenAnswer((_) async => authResponse);
 
       await expectLater(
@@ -167,13 +171,17 @@ void main() {
 
     test('should return user data downloaded from api and save in settings', () async {
       when(_settings.userData).thenReturn(null);
-      final response = UserResponse.fromJson(jsonDecode("""{
+      final response = UserResponse.fromJson(
+        jsonDecode(
+          """{
               "id": "id",
               "username": "username",
               "email": "email",
               "firstName": "firstName",
               "lastName": "lastName"
-              }"""));
+              }""",
+        ),
+      );
       when(_userApi.getUserInfo()).thenAnswer((_) async => response);
 
       await expectLater(
