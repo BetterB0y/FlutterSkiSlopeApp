@@ -165,11 +165,9 @@ class MockUserApi extends _i1.Mock implements _i11.UserApi {
   _i8.Future<_i2.Response> registerUser(Map<String, dynamic>? newUserData) =>
       (super.noSuchMethod(Invocation.method(#registerUser, [newUserData]),
           returnValue: Future<_i2.Response>.value(_FakeResponse_0())) as _i8.Future<_i2.Response>);
-
   @override
   void init(_i4.Settings? settings, _i9.EventBus? eventBus) =>
       super.noSuchMethod(Invocation.method(#init, [settings, eventBus]), returnValueForMissingStub: null);
-
   @override
   _i8.Future<_i2.Response> get(
           {String? url,

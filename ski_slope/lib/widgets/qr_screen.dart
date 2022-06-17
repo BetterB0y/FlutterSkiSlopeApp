@@ -54,14 +54,17 @@ class _QrScreenState extends State<QrScreen> {
       padding: const EdgeInsets.symmetric(vertical: Dimensions.paddingBig),
       child: Column(
         children: [
-          SizedBox(
-            height: heightFactor,
-            child: PageView(
-              onPageChanged: (page) => setState(() => _qrIndex = page),
-              controller: _controller,
-              children: [
-                ...widget.listOfQrs,
-              ],
+          AnimatedSize(
+            duration: Durations.pageViewQrChange,
+            child: SizedBox(
+              height: heightFactor,
+              child: PageView(
+                onPageChanged: (page) => setState(() => _qrIndex = page),
+                controller: _controller,
+                children: [
+                  ...widget.listOfQrs,
+                ],
+              ),
             ),
           ),
           Expanded(
